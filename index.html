@@ -338,7 +338,7 @@
       background-position: center center;
       z-index: 0;
       pointer-events: none;
-      transform: translateZ(0); /* Anti Glitch Android */
+      transform: translateZ(0); 
     }
     
     /* Layer Overlay Gelap */
@@ -357,10 +357,11 @@
       width: 100%;
     }
 
-    /* MAPPING GAMBAR PARALLAX */
+    /* MAPPING GAMBAR PARALLAX SESUAI INSTRUKSI BARU */
     #invitation1.section-parallax::before { background-image: url('galeri8.webp'); }
     #rsvp.section-parallax::before { background-image: url('galeri8.webp'); }
-    .ucapan-footer-bg.section-parallax::before { background-image: url('galeri8.webp'); }
+    /* Penutup dikembalikan menggunakan dasar1.webp */
+    .ucapan-footer-bg.section-parallax::before { background-image: url('dasar1.webp'); }
 
 
     /* =========================================
@@ -480,6 +481,9 @@
     @media (max-width: 768px) {
       #cover-content .names { font-size: 2.2em; }
       .and-symbol { font-size: 50px; }
+      .acara, #rsvp, .bg-static {
+        background-attachment: scroll !important;
+      }
     }
 
     @media (max-width: 480px) {
@@ -515,7 +519,6 @@
 
     #countdown-section > * { position: relative; z-index: 2; }
 
-    /* ANIMASI LINGKARAN KEMERLAP BOKEH */
     .bokeh-container {
       position: absolute !important;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -997,44 +1000,50 @@
     }
     .btn-konfirmasi:hover { background: #fff; color: #233b53; transform: scale(1.03); }
 
-    /* RSVP & PAGINATION */
+    /* =========================================
+       RSVP (TEMA WARNA BIRU SESUAI REQUEST)
+       ========================================= */
     .RSVP-title {
-      font-family: 'Great Vibes', cursive; font-size: 30px; color:  #580b0b; 
+      font-family: 'Great Vibes', cursive; font-size: 38px; color: #354a5f; 
       margin-bottom: 30px;
     }
     .rsvp-container {
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
       padding: 30px; border-radius: 20px; max-width: 600px; margin: 0 auto;
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
       -webkit-backface-visibility: hidden; transform: translateZ(0);
     }
     #rsvp input, #rsvp select, #rsvp textarea, #rsvp button {
-      width: 100%; padding: 12px; margin-top: 10px; border: none;
+      width: 100%; padding: 12px; margin-top: 10px; border: 1px solid #ccc;
       border-radius: 10px; font-size: 16px;
     }
-    #rsvp input, #rsvp textarea, #rsvp select { background: rgba(255,255,255,0.9); color: #333; }
+    #rsvp input, #rsvp textarea, #rsvp select { background: #fff; color: #333; }
+    
+    /* Tombol warna biru (#354a5f) */
     #rsvp button {
-      background: #580b0b; color: #ffffff; font-weight: 600; cursor: pointer; transition: 0.3s;
+      background: #354a5f; color: #ffffff; font-weight: 600; cursor: pointer; transition: 0.3s;
     }
-    #rsvp button:hover { background: #6d0e0e; transform: scale(1.03); }
+    #rsvp button:hover { background: #233b53; transform: scale(1.03); }
+    
     .ucapan-list { margin-top: 30px; text-align: left; }
     .ucapan-item {
-      background: rgba(255,255,255,0.15); border-radius: 12px; padding: 15px;
+      background: rgba(53, 74, 95, 0.1); border-radius: 12px; padding: 15px;
       margin-bottom: 10px; animation: fadeIn 0.6s ease;
+      color: #333;
     }
-    .ucapan-item small { opacity: 0.8; font-size: 13px; }
+    .ucapan-item small { opacity: 0.8; font-size: 13px; color: #5a6e82; }
 
     /* CSS PAGINASI UCAPAN */
     .pagination-container {
       display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap;
     }
     .page-btn {
-      background: rgba(255, 255, 255, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.4) !important;
-      color: white !important; padding: 6px 12px !important; border-radius: 6px !important;
+      background: rgba(53, 74, 95, 0.1) !important; border: 1px solid rgba(53, 74, 95, 0.3) !important;
+      color: #354a5f !important; padding: 6px 12px !important; border-radius: 6px !important;
       cursor: pointer; font-family: 'Poppins', sans-serif !important; font-size: 14px !important;
       transition: all 0.3s ease; width: auto !important; margin-top: 0 !important;
     }
-    .page-btn.active, .page-btn:hover { background: #ffffff !important; color: #580b0b !important; font-weight: bold; }
+    .page-btn.active, .page-btn:hover { background: #354a5f !important; color: #ffffff !important; font-weight: bold; }
 
     @keyframes fadeIn {
       from {opacity: 0; transform: translateY(10px);}
@@ -1354,7 +1363,7 @@
 <!-- ========================================= -->
 <section id="rsvp" class="section-parallax">
   <div class="rsvp-container">
-    <h2 class="RSVP-title animasi-scroll"> Rsvp & Ucapan</h2>
+    <h2 class="RSVP-title animasi-scroll" style="color: #354a5f;"> Rsvp & Ucapan</h2>
     <form id="rsvpForm">
       <input type="text" id="nama" placeholder="Nama Anda" required>
       <textarea id="ucapan" rows="3" placeholder="Tulis ucapan Anda..." required></textarea>
@@ -1367,7 +1376,7 @@
     </form>
     
     <div class="ucapan-list" id="ucapanList">
-      <h3 style="margin-top:30px;">Ucapan & Kehadiran</h3>
+      <h3 style="margin-top:30px; color: #354a5f;">Ucapan & Kehadiran</h3>
       <div id="list"><p style="opacity:0.8; text-align:center;">Memuat ucapan... 😇</p></div>
       <div id="pagination" class="pagination-container"></div>
     </div>
@@ -1393,28 +1402,24 @@
 </nav>
 
 <!-- ========================================= -->
-<!-- PENUTUP BAWAH (DESAIN BINGKAI VVIP & PARALLAX GALERI8) -->
+<!-- PENUTUP BAWAH (DESAIN BINGKAI VVIP & PARALLAX DASAR1) -->
 <!-- ========================================= -->
 <div class="ucapan-footer-bg section-parallax">
-  <section id="ucapan" style="width: 100%;">
+  <section id="ucapan" style="width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 40px 20px;">
     <div class="vintage-frame-container animasi-scroll" data-anim="zoom-up" style="margin: 0 auto; pointer-events: auto;">
       
       <!-- SVG Bingkai Transparan & Garis Lengkap -->
       <svg class="vf-svg-bg" viewBox="0 0 340 540" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);">
-        <path d="M 170 10 C 220 10, 250 40, 290 40 A 15 15 0 0 1 305 55 L 305 65 A 15 15 0 0 0 320 80 L 320 480 A 15 15 0 0 0 305 495 L 305 505 A 15 15 0 0 1 290 520 L 50 520 A 15 15 0 0 1 35 505 L 35 495 A 15 15 0 0 0 20 480 L 20 80 A 15 15 0 0 0 35 65 L 35 55 A 15 15 0 0 1 50 40 C 90 40, 120 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
-        <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 478 A 12 12 0 0 0 290 490 L 290 498 A 12 12 0 0 1 278 510 L 62 510 A 12 12 0 0 1 50 498 L 50 490 A 12 12 0 0 0 38 478 L 38 82 A 12 12 0 0 0 50 70 L 50 62 A 12 12 0 0 1 62 50 C 98 50, 125 22, 170 22 Z" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
+        <!-- Frame Kaca Putih 0.75 dgn Sudut Lancip Atas dan Bawah -->
+        <path d="M 170 10 C 215 10, 240 40, 320 40 L 320 500 C 240 500, 215 530, 170 530 C 125 530, 100 500, 20 500 L 20 40 C 100 40, 125 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
+        <!-- Garis Ukiran Dalam -->
+        <path d="M 170 22 C 210 22, 235 48, 308 48 L 308 492 C 235 492, 210 518, 170 518 C 130 518, 105 492, 32 492 L 32 48 C 105 48, 130 22, 170 22 Z" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
       </svg>
       
-      <div class="vf-content" style="padding: 35px 20px 20px; justify-content: flex-start;">
-        <img src="galeri1.webp" class="vf-photo" alt="Foto Couple" style="width: 52%; aspect-ratio: 3/4; object-fit: cover; border-radius: 1000px 1000px 0 0; border: 1.5px solid #5a6e82; margin-bottom: 20px;">
-        <p class="ucapan-teks" style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #354a5f; margin-bottom: 20px; font-style: italic; line-height: 1.5; text-shadow: none;">
+      <div class="vf-content" style="padding: 20px; justify-content: center;">
+        <img src="galeri1.webp" class="vf-photo" alt="Foto Couple" style="width: 52%; aspect-ratio: 3/4; object-fit: cover; border-radius: 1000px 1000px 0 0; border: 1.5px solid #5a6e82; margin-bottom: 25px;">
+        <p class="ucapan-teks" style="font-family: 'Poppins', sans-serif; font-size: 14px; color: #354a5f; margin-bottom: 0; font-style: italic; line-height: 1.6; text-align: center;">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
-        </p>
-        <p class="ucapan-nama" style="font-family: 'Poppins', sans-serif; font-size: 15px; color: #354a5f; margin-top: 10px; line-height: 1.4; text-shadow: none;">
-          <strong>Om Santih, Santih, Santih, Om.</strong><br><br>
-          <span style="font-size: 12px;">Hormat Kami</span><br>
-          <span style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #7b1f26; display: inline-block; margin-top: 5px;">Bapak Agus Triono & Ibu Titik Setia Rokhani</span><br>
-          <span style="font-size: 12px;">sekeluarga</span>
         </p>
       </div>
     </div>
@@ -1541,7 +1546,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       
       isOpened = true;
-      safePlay();
+      safePlay(); // Musik music.mp3 langsung menyala bersamaan dengan video
       
       // Setelah animasi cover 1.2 detik selesai, hilangkan elemennya sepenuhnya
       setTimeout(() => {
