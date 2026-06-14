@@ -7,7 +7,7 @@
   <meta property="og:url" content="https://rumahdigitalproject.github.io/Arifa-Maulana/" />
 
   <meta charset="UTF-8" />
-  <meta name="theme-color" content="#000" />
+  <meta name="theme-color" content="#fff7f7" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>The Wedding of Billy & Sinta</title>
@@ -22,17 +22,16 @@
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <style>
-    /* RESET & OPTIMASI UMUM */
+    /* RESET & OPTIMASI UMUM (TEMA CERAH DIKEMBALIKAN) */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { 
       font-family: 'Poppins', sans-serif; 
       scroll-behavior: smooth; 
-      background: #fff7f7; /* KEMBALI KE WARNA CERAH ASLI */
+      background: #fff7f7; 
       overflow-x: hidden; 
       -webkit-font-smoothing: antialiased; 
     }
     
-    /* MENGUNCI SCROLL SAAT COVER AKTIF */
     body.lock-scroll { overflow: hidden !important; height: 100vh; }
 
     /* =========================================
@@ -49,12 +48,11 @@
       align-items: center;
       text-align: center;
       color: white;
-      /* Animasi geser ke atas */
+      /* Animasi tirai terangkat (Slide Up) */
       transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); 
       will-change: transform; 
     }
 
-    /* Class yang ditambahkan saat tombol ditekan */
     .cover-slide-up {
       transform: translateY(-100%);
     }
@@ -158,13 +156,10 @@
       transform: scale(1.05); 
     }
 
-    .btn-open i {
-      color: #ffffff; 
-      font-size: 1.1em; 
-    }
+    .btn-open i { color: #ffffff; font-size: 1.1em; }
 
     /* =========================================
-       SLIDESHOW (SEKARANG MENGGUNAKAN VIDEO)
+       SLIDESHOW (MENGGUNAKAN VIDEO OTOMATIS)
        ========================================= */
     #invitation { 
       display: none;
@@ -191,7 +186,7 @@
       z-index: 0;
     }
 
-    /* KOTAK OVERLAY MUNCUL DI DETIK KE-7 (PERSIS REFERENSI) */
+    /* KOTAK OVERLAY BINGKAI KLASIK (MUNCUL DETIK KE-7) */
     #video-overlay {
       position: absolute;
       top: 0; left: 0;
@@ -202,57 +197,76 @@
       justify-content: center;
       align-items: center;
       opacity: 0; /* Disembunyikan di awal */
-      pointer-events: none; /* Agar video bisa diklik kalau perlu */
+      pointer-events: none; 
       transition: opacity 1.5s ease-in-out;
     }
 
-    .video-frame {
-      border: 3px solid #5a6e82; /* Warna biru-abu klasik elegan */
-      border-radius: 200px 200px 15px 15px; /* Bentuk melengkung atas (Arch) */
-      padding: 60px 30px 40px;
-      background: rgba(255, 255, 255, 0.75); /* Putih transparan */
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      text-align: center;
+    /* SVG BINGKAI MELIUK-LIUK PUTIH TRANSPARAN (PERSIS GAMBAR REFERENSI) */
+    .vintage-frame-container {
+      position: relative;
       width: 85%;
       max-width: 340px;
-      position: relative;
+      padding: 45px 20px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
-    /* Garis dalam bingkai agar lebih detail & mahal */
-    .video-frame::before {
-      content: '';
+    .vf-svg-bg {
       position: absolute;
-      top: 10px; left: 10px; right: 10px; bottom: 10px;
-      border: 1px solid #5a6e82;
-      border-radius: 190px 190px 10px 10px;
-      pointer-events: none;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.3));
+    }
+
+    .vf-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .vf-photo {
+      width: 140px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 100px 100px 0 0; /* Bentuk setengah lingkaran di atas */
+      border: 2px solid #5a6e82; /* Warna bingkai biru klasik */
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .vf-top {
       font-family: 'Playfair Display', serif;
-      font-size: 15px;
+      font-size: 13px;
       letter-spacing: 2px;
-      color: #333;
-      margin-bottom: 10px;
+      color: #5a6e82;
+      margin-bottom: 8px;
       text-transform: uppercase;
+      font-weight: 600;
     }
 
     .vf-names {
-      font-family: 'Great Vibes', cursive;
-      font-size: 42px;
-      color: #354a5f; /* Biru abu gelap */
-      margin: 0;
-      text-shadow: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: #354a5f;
+      margin: 0 0 15px 0;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
     .vf-date {
-      font-family: 'Playfair Display', serif;
-      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
       letter-spacing: 1px;
-      color: #444;
-      margin-top: 15px;
+      color: #5a6e82;
       font-weight: 600;
     }
 
@@ -273,7 +287,7 @@
     }
     
     /* =========================================
-       SECTION MEMPELAI & ISI (WARNA CERAH ASLI)
+       SECTION MEMPELAI & ISI (TEMA CERAH KEMBALI)
        ========================================= */
     .invitation1 {
       padding: 40px 20px;
@@ -314,12 +328,10 @@
       padding: 0 20px; 
     }
 
-    .arti-ayat {
-      font-style: italic;
-    }
+    .arti-ayat { font-style: italic; }
 
     /* BINGKAI FOTO MEMPELAI */
-    .foto-mempelai {
+    .foto-mempelai-bingkai {
       width: 170px;
       height: 250px;
       object-fit: cover;
@@ -358,20 +370,21 @@
       font-size: 20px;
       margin-top: 15px;
       margin-bottom: 10px;
-      color: #FFF;
+      color: #7b1f26;
       line-height: 1.3;
+      font-weight: 600;
     }
 
     .orang-tua {
       font-size: 15px;
-      color: #FFFFFF;
+      color: #7b1f26;
       margin-top: 4px;
       margin-bottom: 10px;
     }
 
     .alamat0 {
       font-size: 12px;
-      color: #FFFFFF;
+      color: #7b1f26;
       margin-top: 12px;
       font-style: italic;
     }
@@ -390,7 +403,6 @@
       .bismillah { font-size: 20px; }
       .and-symbol { font-size: 50px; }
       
-      /* MEMATIKAN BACKGROUND FIXED DI HP AGAR TIDAK NGE-LAG */
       .invitation1, .acara, #rsvp, .bg-static {
         background-attachment: scroll !important;
       }
@@ -400,11 +412,11 @@
       #cover-content .names { font-size: 2em; }
       .bismillah { font-size: 18px; }
       .and-symbol { font-size: 46px; }
-      .foto-mempelai { width: 150px; height: 220px; } 
+      .foto-mempelai-bingkai { width: 150px; height: 220px; } 
     }
  
     /* =========================================
-       COUNTDOWN SECTION BOKEH FULL ROMBAK
+       COUNTDOWN SECTION BOKEH (KUNANG-KUNANG)
        ========================================= */
     #countdown-section {
       position: relative;
@@ -417,7 +429,7 @@
       background: url('galeri3.webp') center center / cover no-repeat;
       color: #ffffff;
       text-align: left;
-      overflow: hidden; /* Mengunci partikel agar tidak keluar batas */
+      overflow: hidden;
     }
 
     #countdown-section::before {
@@ -428,10 +440,7 @@
       z-index: 1;
     }
 
-    #countdown-section > * {
-      position: relative;
-      z-index: 2;
-    }
+    #countdown-section > * { position: relative; z-index: 2; }
 
     /* ANIMASI LINGKARAN KEMERLAP BOKEH */
     .bokeh-container {
@@ -442,8 +451,7 @@
     }
 
     .bokeh-circle {
-      position: absolute;
-      bottom: -50px;
+      position: absolute; bottom: -50px;
       background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
       border-radius: 50%;
       will-change: transform, opacity;
@@ -786,7 +794,7 @@
     .next { right: 15px; }
 
     /* =========================================
-       GIFT SECTION (TAMPIL LANGSUNG + WA FORM)  
+       GIFT SECTION 
        ========================================= */
     #gift {
       position: relative;
@@ -990,7 +998,7 @@
       flex-direction: column; text-align: center;
       backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
       box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-      -webkit-backface-visibility: hidden; transform: translateZ(0); /* Anti Lag */
+      -webkit-backface-visibility: hidden; transform: translateZ(0); 
     }
     .ucapan-box * { position: relative; z-index: 1; }
     .ucapan-teks {
@@ -1069,12 +1077,20 @@
   <video id="bgVideo" src="video.mp4" playsinline muted preload="auto" class="background-video"></video>
   
   <div id="video-overlay">
-    <div class="video-frame">
-      <p class="vf-top">The Wedding Of</p>
-      <h2 class="vf-names">Billy &amp; Sinta</h2>
-      <p class="vf-date">Selasa, 18 Juli 2026</p>
+    <div class="vintage-frame-container">
+      <svg class="vf-svg-bg" viewBox="0 0 300 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 20,40 Q 20,20 40,20 Q 50,20 50,10 Q 50,0 60,0 L 240,0 Q 250,0 250,10 Q 250,20 260,20 Q 280,20 280,40 L 280,460 Q 280,480 260,480 Q 250,480 250,490 Q 250,500 240,500 L 60,500 Q 50,500 50,490 Q 50,480 40,480 Q 20,480 20,460 Z" fill="rgba(255,255,255,0.85)" stroke="#8196a1" stroke-width="2"/>
+        <path d="M 30,45 Q 30,30 45,30 Q 55,30 55,20 Q 55,10 65,10 L 235,10 Q 245,10 245,20 Q 245,30 255,30 Q 270,30 270,45 L 270,455 Q 270,470 255,470 Q 245,470 245,480 Q 245,490 235,490 L 65,490 Q 55,490 55,480 Q 55,470 45,470 Q 30,470 30,455 Z" fill="none" stroke="#8196a1" stroke-width="1.5"/>
+      </svg>
+      
+      <div class="vf-content">
+        <img src="foto5.webp" class="vf-photo" alt="Foto Couple">
+        <p class="vf-top">THE WEDDING OF</p>
+        <h2 class="vf-names">Billy & Sinta</h2>
+        <p class="vf-date">SELASA, 18 JULI 2026</p>
+      </div>
     </div>
-    <div class="scroll-arrow" id="scrollArrow" style="bottom: 40px; z-index: 5;">↓</div>
+    <div class="scroll-arrow" id="scrollArrow">↓</div>
   </div>
 </div>
 
@@ -1091,14 +1107,14 @@
   <div class="box-putih-kecil animasi-scroll">
     <div class="profilx">
       <div class="pengantinx animasi-scroll">
-        <img src="foto-pria.webp" class="foto-mempelai" alt="Foto Billy" loading="lazy" decoding="async">
+        <img src="foto-pria.webp" class="foto-mempelai-bingkai" alt="Foto Billy" loading="lazy" decoding="async">
         <h2 class="nama-pengantin">BILLY FADE LEONA</h2>
         <p class="orang-tua">Putra dari<br>Bpk. Sutiman & Ibu Sutarti</p>
         <p class="alamat0">Dusun Tirtomoyo RT 2/RW 1<br>Desa Krisik, Kec. Gandusari</p>
       </div>
       <div class="and-symbol animasi-scroll">&</div>
       <div class="pengantinx animasi-scroll">
-        <img src="foto-wanita.webp" class="foto-mempelai" alt="Foto Sinta" loading="lazy" decoding="async">
+        <img src="foto-wanita.webp" class="foto-mempelai-bingkai" alt="Foto Sinta" loading="lazy" decoding="async">
         <h2 class="nama-pengantin">SINTA WULAN DARI</h2>
         <p class="orang-tua">Putri dari<br>Bpk. Agus Triono & Ibu Titik Setia Rokhani</p>
         <p class="alamat0">Dsn. Bintang RT 01/01<br>Ds. Ngaringan, Kec. Gandusari</p>
@@ -1384,7 +1400,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const nominal = document.getElementById("tfNominal").value;
       const ucapan = document.getElementById("tfUcapan").value;
       
-      // Nomor WA Tujuan Update
+      // Nomor WA Tujuan Update (085706889273)
       const phone = "6285706889273";
       
       let message = `Halo, saya telah mengirimkan kado pernikahan (Gift) dengan rincian:\n\n`;
@@ -1413,13 +1429,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === BUKA UNDANGAN (COVER SLIDE UP & VIDEO SYNC) ===
+  // === BUKA UNDANGAN (COVER SLIDE UP & SENSOR VIDEO EKSKLUSIF) ===
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
   const invitation = document.getElementById("invitation1") || document.querySelector(".invitation1");
   const menu = document.getElementById("menuNavigasi");
   const bgMusic = document.getElementById("bgMusic");
+  const bgVideo = document.getElementById("bgVideo");
+  const videoOverlay = document.getElementById("video-overlay");
+  
   let isOpened = false;
+  let menuShown = false;
 
   function safePlay() {
     if (!bgMusic) return;
@@ -1433,36 +1453,44 @@ document.addEventListener("DOMContentLoaded", () => {
   if (openBtn && cover && invitation) {
     openBtn.addEventListener("click", () => {
       document.body.classList.remove("lock-scroll");
-      invitation.style.display = "block"; // Munculkan sisa undangan di background agar siap discroll
+      invitation.style.display = "block"; 
       
-      // Memicu CSS transition bergeser ke atas (Slide up)
+      // Memicu CSS transition Cover Terangkat ke atas (Slide up)
       cover.classList.add("cover-slide-up");
       
-      // LANGSUNG putar video sesaat setelah tombol diklik
-      const bgVideo = document.getElementById("bgVideo");
+      // Video langsung otomatis jalan sesaat setelah tombol diklik
       if (bgVideo) {
         bgVideo.play();
       }
       
       isOpened = true;
       safePlay();
-      if (menu) menu.classList.add("show");
       
-      // Setelah 1.5 detik animasi selesai, hilangkan elemen cover biar tak membebani klik
+      // Setelah animasi cover 1.2 detik selesai, hilangkan elemennya sepenuhnya
       setTimeout(() => {
         cover.style.display = "none";
-      }, 1500); 
+      }, 1200); 
     });
   }
 
-  // Sensor Waktu Video: Munculkan frame di detik ke-7
-  const bgVideo = document.getElementById("bgVideo");
-  const videoOverlay = document.getElementById("video-overlay");
-  
-  if (bgVideo && videoOverlay) {
+  // === TIMELINE SENSOR VIDEO (DETIK KE-7 & DETIK KE-11) ===
+  if (bgVideo) {
     bgVideo.addEventListener("timeupdate", () => {
-      if (bgVideo.currentTime >= 7) {
+      // 1. Detik 7: Bingkai Meliuk Putih Transparan Muncul
+      if (bgVideo.currentTime >= 7 && videoOverlay) {
         videoOverlay.style.opacity = "1";
+        videoOverlay.style.pointerEvents = "auto";
+      }
+      
+      // 2. Detik 11: Menu Navigator Bawah Muncul Otomatis
+      if (bgVideo.currentTime >= 11 && !menuShown) {
+        if (menu) menu.classList.add("show");
+        menuShown = true;
+      }
+      
+      // 3. Detik 13.9: Matikan video agar beku (freeze) menjadi background di frame terakhir
+      if (bgVideo.currentTime >= 13.9) {
+        bgVideo.pause();
       }
     });
   }
@@ -1477,7 +1505,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // === COUNTDOWN ACARA TERBARU ===
   function countdown() {
-    // 18 Juli 2026 Jam 09:00 WIB
     const target = new Date(2026, 6, 18, 9, 0, 0).getTime();
     const endEvent = new Date(2026, 6, 20, 0, 0, 0).getTime();
     const now = Date.now();
@@ -1667,3 +1694,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
