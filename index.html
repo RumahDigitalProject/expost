@@ -186,7 +186,7 @@
     }
 
     /* =========================================
-       BINGKAI VEKTOR LANCIP MELIUK (DETIK KE-4)
+       ANIMASI BINGKAI SEKUENSIAL VVIP
        ========================================= */
     #video-overlay {
       position: absolute;
@@ -197,19 +197,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      
-      /* Animasi Mengambang Keren Awal Disembunyikan */
-      opacity: 0; 
-      transform: scale(0.85) translateY(30px);
       pointer-events: none; 
-      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    /* Class yang ditambah di Detik Ke-4 via JS */
-    #video-overlay.show-frame {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-      pointer-events: auto;
     }
 
     .vintage-frame-container {
@@ -220,14 +208,39 @@
       filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.3)); 
     }
 
+    /* 1. Latar Belakang Kaca Transparan */
     .vf-svg-bg {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
       z-index: 1;
+      border-radius: 20px;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      transition: backdrop-filter 1.5s ease-in-out, -webkit-backdrop-filter 1.5s ease-in-out;
+    }
+    .show-frame .vf-svg-bg {
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
-      border-radius: 20px;
+    }
+
+    .anim-bg {
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .show-frame .anim-bg {
+      opacity: 1; /* Transisi memunculkan kaca putih */
+    }
+
+    /* 2. Garis Animasi Meliuk (Drawing Effect) */
+    .anim-line {
+      stroke-dasharray: 1500;
+      stroke-dashoffset: 1500;
+      transition: stroke-dashoffset 2s cubic-bezier(0.42, 0, 0.58, 1);
+      transition-delay: 1.5s; /* Mulai setelah kaca putih muncul penuh */
+    }
+    .show-frame .anim-line {
+      stroke-dashoffset: 0; /* Garis akan tergambar menyambung */
     }
 
     .vf-content {
@@ -239,16 +252,38 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding-top: 35px; /* Disesuaikan agar isi turun sedikit dari pucuk lancip */
+      padding-top: 35px;
     }
 
-    .vf-photo {
+    /* 3. Munculnya Foto Mempelai */
+    .anim-photo {
       width: 52%; 
       aspect-ratio: 3 / 4;
       object-fit: cover;
       border-radius: 1000px 1000px 0 0; 
       border: 1.5px solid #5a6e82; 
       margin-bottom: 25px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 1s ease-out;
+      transition-delay: 3.5s; /* Mulai setelah garis menyambung sempurna */
+    }
+    .show-frame .anim-photo {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 4. Munculnya Teks Nama */
+    .anim-text {
+      opacity: 0;
+      transform: translateY(15px);
+      text-align: center;
+      transition: all 1s ease-out;
+      transition-delay: 4.5s; /* Mulai setelah foto muncul */
+    }
+    .show-frame .anim-text {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .vf-top {
@@ -1073,28 +1108,38 @@
 </div>
 
 <!-- ========================================= -->
-<!-- SLIDESHOW (VIDEO BACKGROUND & BINGKAI OGEE ARCH)-->
+<!-- SLIDESHOW (VIDEO BACKGROUND & ANIMASI VVIP)-->
 <!-- ========================================= -->
 <div class="slideshow" id="slideshow-section">
-  <!-- Video background memutar 1 kali dan berhenti (tanpa loop) -->
+  <!-- Video background -->
   <video id="bgVideo" src="video.mp4" playsinline muted preload="auto" class="background-video"></video>
   
-  <!-- KOTAK OVERLAY BINGKAI MELIUK LANCIP (MUNCUL DETIK KE-4) -->
   <div id="video-overlay">
     <div class="vintage-frame-container">
-      <!-- Vektor SVG Bingkai Ogee Arch (Puncak Lancip) dengan Putih Transparan Kaca 0.75 -->
+      
+      <!-- SVG Bingkai Transparan & Garis Menyambung (Animasi Sekuensial) -->
       <svg class="vf-svg-bg" viewBox="0 0 340 540" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 170 10 C 220 10, 250 40, 290 40 A 15 15 0 0 1 305 55 L 305 65 A 15 15 0 0 0 320 80 L 320 480 A 15 15 0 0 0 305 495 L 305 505 A 15 15 0 0 1 290 520 L 50 520 A 15 15 0 0 1 35 505 L 35 495 A 15 15 0 0 0 20 480 L 20 80 A 15 15 0 0 0 35 65 L 35 55 A 15 15 0 0 1 50 40 C 90 40, 120 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
-        <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 478 A 12 12 0 0 0 290 490 L 290 498 A 12 12 0 0 1 278 510 L 62 510 A 12 12 0 0 1 50 498 L 50 490 A 12 12 0 0 0 38 478 L 38 82 A 12 12 0 0 0 50 70 L 50 62 A 12 12 0 0 1 62 50 C 98 50, 125 22, 170 22 Z" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
+        <!-- Latar Putih Kaca Pekat 0.75 (Muncul Pertama - Fase 1) -->
+        <path class="anim-bg" d="M 170 10 C 220 10, 250 40, 290 40 A 15 15 0 0 1 305 55 L 305 65 A 15 15 0 0 0 320 80 L 320 480 A 15 15 0 0 0 305 495 L 305 505 A 15 15 0 0 1 290 520 L 50 520 A 15 15 0 0 1 35 505 L 35 495 A 15 15 0 0 0 20 480 L 20 80 A 15 15 0 0 0 35 65 L 35 55 A 15 15 0 0 1 50 40 C 90 40, 120 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
+        
+        <!-- Garis ukiran dalam Kanan (Muncul Kedua, Menggambar ke bawah - Fase 2) -->
+        <path class="anim-line" d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 478 A 12 12 0 0 0 290 490 L 290 498 A 12 12 0 0 1 278 510 L 170 510" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
+        
+        <!-- Garis ukiran dalam Kiri (Muncul Kedua, Menggambar ke bawah - Fase 2) -->
+        <path class="anim-line" d="M 170 22 C 125 22, 98 50, 62 50 A 12 12 0 0 0 50 62 L 50 70 A 12 12 0 0 1 38 82 L 38 478 A 12 12 0 0 1 50 490 L 50 498 A 12 12 0 0 0 62 510 L 170 510" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
       </svg>
       
-      <!-- Isi dalam bingkai: Foto Arch dan Teks -->
+      <!-- Isi Konten Bingkai -->
       <div class="vf-content">
-        <!-- Foto diganti menjadi galeri1.webp -->
-        <img src="galeri1.webp" class="vf-photo" alt="Foto Couple">
-        <p class="vf-top">THE WEDDING OF</p>
-        <h2 class="vf-names">Sinta & Billy</h2>
-        <p class="vf-date">SELASA, 18 JULI 2026</p>
+        <!-- Foto (Muncul Ketiga - Fase 3) -->
+        <img src="galeri1.webp" class="vf-photo anim-photo" alt="Foto Couple">
+        
+        <!-- Teks Nama Pengantin (Muncul Keempat - Fase 4) -->
+        <div class="anim-text">
+          <p class="vf-top">THE WEDDING OF</p>
+          <h2 class="vf-names">Sinta & Billy</h2>
+          <p class="vf-date">SELASA, 18 JULI 2026</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1138,7 +1183,6 @@
 </section>
 
 <section id="countdown-section" class="countdown-section">
-  <!-- ELEMEN ANIMASI KELAP-KELIP BOKEH (KUNANG-KUNANG) -->
   <div class="bokeh-container">
     <div class="bokeh-circle" style="left: 10%; width: 25px; height: 25px; --duration: 12s; --twinkle: 2s; --scale: 0.8; --opacity: 0.7; animation-delay: 0s;"></div>
     <div class="bokeh-circle" style="left: 25%; width: 40px; height: 40px; --duration: 18s; --twinkle: 3s; --scale: 1.2; --opacity: 0.5; animation-delay: 4s;"></div>
@@ -1186,9 +1230,6 @@
   </div>
 </section>
 
-<!-- ========================================= -->
-<!-- GALERI (MARQUEE 8 FOTO + GRID 8 FOTO) -->
-<!-- ========================================= -->
 <section id="galeri-section" class="galeri-section">
   <h2 class="galeri-title animasi-scroll">Galeri</h2>
 
@@ -1248,9 +1289,6 @@
   <a class="next">❯</a>
 </div>
 
-<!-- ========================================= -->
-<!-- GIFT SECTION (TAMPIL LANGSUNG + WA FORM)  -->
-<!-- ========================================= -->
 <section id="gift" class="section">
   <div class="animasi-scroll" data-anim="up">
     <h2 class="GIFT-title">Gift Wedding</h2>
@@ -1442,7 +1480,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === BUKA UNDANGAN (COVER SLIDE UP & SENSOR VIDEO EKSKLUSIF) ===
+  // === BUKA UNDANGAN (COVER SLIDE UP & SENSOR VIDEO VVIP) ===
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
   const invitation = document.getElementById("invitation1") || document.querySelector(".invitation1");
@@ -1486,11 +1524,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === TIMELINE SENSOR VIDEO (DETIK KE-4 & DETIK KE-11) ===
+  // === TIMELINE SENSOR VIDEO ANIMASI SEKUENSIAL ===
   if (bgVideo) {
     bgVideo.addEventListener("timeupdate", () => {
-      // 1. Detik 4: Bingkai Vektor Ogee Arch Muncul dengan animasi POP-UP Keren
+      // 1. Detik 4: Memicu Seluruh Rantai Animasi Bingkai VVIP
       if (bgVideo.currentTime >= 4 && videoOverlay) {
+        // Class ini akan menjalankan urutan di CSS: Kaca -> Garis Menyambung -> Foto -> Teks
         videoOverlay.classList.add("show-frame");
       }
       
