@@ -482,13 +482,18 @@
       .foto-mempelai-bingkai { width: 150px; height: 220px; } 
     }
 
-    /* ORNAMEN GUNUNGAN (DIPERBESAR JADI 80PX) */
+    /* ORNAMEN GUNUNGAN */
     .ikon-gunungan {
-      width: 80px;
+      width: 80px; /* Sesuai kesepakatan diperbesar 80px */
       height: auto;
       margin: 0 auto 10px auto;
       display: block;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+    
+    /* Gunungan Penutup Khusus Kecil */
+    .ikon-gunungan-penutup {
+      width: 50px !important; /* Dibuat 50px sesuai permintaan terakhir khusus penutup */
     }
  
     /* =========================================
@@ -626,11 +631,10 @@
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(243, 163, 2, 0.5); 
-      border-radius: 999px;
-      aspect-ratio: 9 / 12;
+      border-radius: 180px; /* Bentuk kapsul yang tidak terpotong */
       max-width: 380px;
       width: 100%;
-      padding: 20px 24px;
+      padding: 60px 24px; /* Padding sangat lega atas-bawah agar konten tidak terpotong */
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       text-align: center;
       color: #ffffff;
@@ -686,7 +690,7 @@
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 
-    .tombol-maps { text-align: center; margin: 24px 0; }
+    .tombol-maps { text-align: center; margin: 24px 0 0 0; }
     .tombol-maps a {
       display: inline-block;
       background: rgba(255, 255, 255, 0.1); 
@@ -702,8 +706,7 @@
     .tombol-maps a:hover { background-color: #f3a302; color: #3a0606; }
 
     /* =========================================
-       GALERI SECTION & ORNAMEN WAYANG RAKSASA 
-       (Animasi Cahaya Dihapus Total Agar Ringan)
+       GALERI SECTION & ORNAMEN WAYANG STATIS 
        ========================================= */
     .galeri-section {
       padding: 60px 20px;
@@ -716,26 +719,24 @@
       margin-bottom: 0px;
       min-height: 100vh;
       overflow: hidden; 
-      position: relative; /* Mengunci hiasan wayang di area ini */
+      position: relative; 
     }
 
-    /* ORNAMEN WAYANG BACKGROUND GALERI (FORMASI 3 KIRI - 2 KANAN) */
+    /* ORNAMEN WAYANG (UKURAN 200PX FORMASI 3-2) */
     .hiasan-wayang {
       position: absolute;
       z-index: 1; /* Di bawah foto galeri */
-      width: 250px; /* Diperbesar jadi Raksasa */
-      opacity: 0.6; /* Transparan agar elegan menyatu dengan bg */
+      width: 200px; /* Sesuai instruksi diperkecil dari 250px */
+      opacity: 0.6; 
       pointer-events: none;
     }
     
-    /* Wayang Kiri (3 Buah) */
-    .wayang-kiri-1 { top: 5%; left: -60px; transform: rotate(15deg); }
-    .wayang-kiri-2 { top: 45%; left: -60px; transform: rotate(15deg); }
-    .wayang-kiri-3 { bottom: 5%; left: -60px; transform: rotate(15deg); }
+    .wayang-kiri-1 { top: 5%; left: -50px; transform: rotate(15deg); }
+    .wayang-kiri-2 { top: 45%; left: -50px; transform: rotate(15deg); }
+    .wayang-kiri-3 { bottom: 5%; left: -50px; transform: rotate(15deg); }
     
-    /* Wayang Kanan (2 Buah, di-flip horizontal) */
-    .wayang-kanan-1 { top: 20%; right: -60px; transform: scaleX(-1) rotate(15deg); }
-    .wayang-kanan-2 { bottom: 20%; right: -60px; transform: scaleX(-1) rotate(15deg); }
+    .wayang-kanan-1 { top: 20%; right: -50px; transform: scaleX(-1) rotate(15deg); }
+    .wayang-kanan-2 { bottom: 20%; right: -50px; transform: scaleX(-1) rotate(15deg); }
 
     /* Teks Galeri Burgundy Center */
     .galeri-title {
@@ -796,7 +797,7 @@
       max-width: 1000px;
       margin: 0 auto;
       position: relative;
-      z-index: 2; /* Agar foto tetap di atas wayang */
+      z-index: 2; 
     }
 
     /* ITEM GALERI BERSIH & SANGAT RINGAN TANPA ANIMASI */
@@ -872,7 +873,7 @@
       color: #354a5f;
       background-image: url('dasar.webp');
       background-size: contain;
-      background-color: #ffffff; /* Latar Belakang Putih Sama Dengan Galeri */
+      background-color: #ffffff;
       min-height: auto;
       z-index: 0;
     }
@@ -896,24 +897,23 @@
       text-align: center;
     }
 
-    /* TEKS DOA RATA TENGAH & JARAK DILEBARKAN */
     .gift-thanks {
       font-family: 'Poppins', sans-serif;
       font-size: 15px;
       opacity: 0.9;
-      margin-bottom: 55px; /* Jarak dibuat lebih lega dengan bingkai bawah */
+      margin-bottom: 55px; 
       font-style: italic;
       max-width: 600px;
       margin-left: auto; margin-right: auto;
-      text-align: center; /* Rata Tengah Mutlak */
+      text-align: center; 
     }
 
-    /* KAPSUL BINGKAI RAKSASA WEDDING GIFT + BACKGROUND BLUR OVERLAY VVIP */
+    /* KAPSUL BINGKAI RAKSASA WEDDING GIFT + BACKGROUND BLUR GALERI8 YG LEBIH JELAS */
     .box-gift-pill {
       border: 3px solid #354a5f; 
-      outline: 2px solid #354a5f; /* Garis luar */
-      outline-offset: 8px; /* Jarak garis luar */
-      border-radius: 180px; /* Bentuk kapsul memanjang */
+      outline: 2px solid #354a5f; 
+      outline-offset: 8px; 
+      border-radius: 180px; 
       max-width: 360px;
       width: 90vw;
       padding: 80px 20px 60px; 
@@ -923,30 +923,29 @@
       flex-direction: column;
       align-items: center;
       position: relative;
-      overflow: hidden; /* Mengunci background gambar di dalam kapsul */
+      overflow: hidden; 
       z-index: 1;
     }
 
-    /* Background galeri8.webp di-blur di dalam Kapsul */
+    /* Background galeri8.webp di-blur ringan */
     .box-gift-pill::before {
       content: "";
       position: absolute;
-      inset: -10px; /* Diberi jarak negatif supaya tepi blurnya tidak putih */
+      inset: -10px; 
       background: url('galeri8.webp') center center / cover no-repeat;
-      filter: blur(6px);
+      filter: blur(2px); /* Blur tipis agar foto jelas */
       z-index: -2;
     }
 
-    /* Overlay Warna Putih Terang Supaya Tulisan Jelas */
+    /* Overlay Warna Putih Tipis Supaya Foto Menyeluruh Terlihat Jelas */
     .box-gift-pill::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.85); /* Overlay semi-transparan putih */
+      background: rgba(255, 255, 255, 0.55); /* Transparan 0.55 (lebih tipis) */
       z-index: -1;
     }
 
-    /* Mengamankan elemen di dalam kapsul agar ada di atas background */
     .box-gift-pill > * {
       position: relative;
       z-index: 2;
@@ -993,7 +992,6 @@
       font-family: 'Poppins', sans-serif; font-size: 13px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); background: #ffffff; color: #333; box-sizing: border-box; 
     }
     
-    /* Tombol Konfirmasi Pendek, Kecil Sesuai Request */
     .btn-konfirmasi {
       width: auto; padding: 8px 30px; background: #354a5f; color: #fff; 
       border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
@@ -1012,13 +1010,13 @@
     .RSVP-title {
       font-family: 'Great Vibes', cursive; font-size: 38px; color: #354a5f; 
       margin-bottom: 30px;
-      text-align: center; /* Rata Tengah */
+      text-align: center; 
       width: 100%;
       display: block;
     }
     .rsvp-container {
-      background: rgba(255, 255, 255, 0.65); /* Cerah Transparan */
-      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); /* Blur tipis 5px */
+      background: rgba(255, 255, 255, 0.65); 
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); 
       border: 1px solid rgba(255, 255, 255, 0.8);
       padding: 30px; border-radius: 20px; max-width: 600px; margin: 0 auto; width: 100%;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -1029,18 +1027,17 @@
     #rsvp input, #rsvp select, #rsvp textarea, #rsvp button {
       width: 100%; 
       max-width: 100%; 
-      box-sizing: border-box; /* Kunci Padding masuk ukuran asli */
+      box-sizing: border-box; 
       padding: 12px; margin-top: 10px; border: 1px solid rgba(255,255,255,0.5);
       border-radius: 10px; font-size: 16px;
       font-family: 'Poppins', sans-serif;
     }
 
-    /* UKURAN KOTAK UCAPAN DIBUAT KECIL (1 BARIS) NAMUN AUTO-EXPAND */
     #rsvp textarea { 
-      height: 48px; /* Sama tinggi dengan kotak input nama */
+      height: 48px; 
       min-height: 48px;
-      resize: none; /* Cegah ditarik manual agar rapi */
-      overflow: hidden; /* Sembunyikan scrollbar agar auto-expand bekerja mulus */
+      resize: none; 
+      overflow: hidden; 
     } 
 
     #rsvp input, #rsvp textarea, #rsvp select { background: rgba(255,255,255,0.9); color: #333; }
@@ -1170,9 +1167,6 @@
 </head>
 <body class="lock-scroll">
 
-<!-- ========================================= -->
-<!-- COVER HALAMAN PEMBUKA (SLIDE UP)          -->
-<!-- ========================================= -->
 <div id="cover">
   <div id="cover-content">
     <div>
@@ -1190,16 +1184,12 @@
   </div>
 </div>
 
-<!-- ========================================= -->
-<!-- SLIDESHOW (VIDEO BACKGROUND & ANIMASI VVIP)-->
-<!-- ========================================= -->
 <div class="slideshow" id="slideshow-section">
   <video id="bgVideo" src="video.mp4" playsinline muted preload="auto" class="background-video"></video>
   
   <div id="video-overlay">
     <div class="vintage-frame-container">
       
-      <!-- SVG Bingkai Transparan & Garis Menyambung -->
       <svg class="vf-svg-bg" viewBox="0 0 340 540" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path class="anim-bg" d="M 170 10 C 220 10, 250 40, 290 40 A 15 15 0 0 1 305 55 L 305 65 A 15 15 0 0 0 320 80 L 320 480 A 15 15 0 0 0 305 495 L 305 505 A 15 15 0 0 1 290 520 L 50 520 A 15 15 0 0 1 35 505 L 35 495 A 15 15 0 0 0 20 480 L 20 80 A 15 15 0 0 0 35 65 L 35 55 A 15 15 0 0 1 50 40 C 90 40, 120 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
         <path class="anim-line" d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 478 A 12 12 0 0 0 290 490 L 290 498 A 12 12 0 0 1 278 510 L 170 510" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
@@ -1218,9 +1208,6 @@
   </div>
 </div>
 
-<!-- ========================================= -->
-<!-- SECTION MEMPELAI / NAVIGATOR LOVE (PARALLAX SEMPURNA)-->
-<!-- ========================================= -->
 <section id="invitation1" class="section-parallax">
   
   <p class="bismillah animasi-scroll" data-anim="left">ॐ</p>
@@ -1292,12 +1279,8 @@
   </a>
 </section>
 
-<!-- ========================================= -->
-<!-- ACARA (PARALLAX SEMPURNA GALERI8)         -->
-<!-- ========================================= -->
-<section class="acara section-parallax" style="padding: 40px 20px;">
+<section class="acara section-parallax">
   <div class="box-acara animasi-scroll">
-    <!-- ORNAMEN GUNUNGAN DI ATAS TEKS (DIPERBESAR JADI 80PX) -->
     <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan animasi-scroll" data-anim="zoom-up" loading="lazy">
     
     <p class="judul animasi-scroll" data-anim="zoom-up">Resepsi Pernikahan</p>
@@ -1311,12 +1294,8 @@
   </div>
 </section>
 
-<!-- ========================================= -->
-<!-- GALERI SECTION & ORNAMEN WAYANG RAKSASA STATIS (ANTI LAG) -->
-<!-- ========================================= -->
 <section id="galeri-section" class="galeri-section">
   
-  <!-- ORNAMEN WAYANG DIBELAKANG GALERI (FORMASI 3 KIRI - 2 KANAN) -->
   <img src="wayang.webp" alt="Wayang Kiri" class="hiasan-wayang wayang-kiri-1" loading="lazy">
   <img src="wayang.webp" alt="Wayang Kiri" class="hiasan-wayang wayang-kiri-2" loading="lazy">
   <img src="wayang.webp" alt="Wayang Kiri" class="hiasan-wayang wayang-kiri-3" loading="lazy">
@@ -1381,9 +1360,6 @@
   <a class="next">❯</a>
 </div>
 
-<!-- ========================================= -->
-<!-- GIFT SECTION (WEDDING GIFT - KAPSUL VVIP DENGAN BLUR BACKGROUND) -->
-<!-- ========================================= -->
 <section id="gift" class="section">
   <div class="animasi-scroll" data-anim="up" style="position: relative; z-index: 2;">
     <h2 class="GIFT-title">Wedding Gift</h2>
@@ -1395,7 +1371,6 @@
 
   <div class="box-gift-pill animasi-scroll" data-anim="up">
       
-      <!-- ORNAMEN GUNUNGAN DI ATAS ATM (DIPERBESAR JADI 80PX) -->
       <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan animasi-scroll" data-anim="zoom-up" loading="lazy" style="margin-bottom: 25px;">
       
       <div class="atm-card" data-rek="1122 3344 5566" style="display: none !important;">
@@ -1444,15 +1419,11 @@
   </div>
 </section>
 
-<!-- ========================================= -->
-<!-- RSVP (PARALLAX SEMPURNA BACKGROUND GALERI8)-->
-<!-- ========================================= -->
 <section id="rsvp" class="section-parallax">
   <div class="rsvp-container">
     <h2 class="RSVP-title animasi-scroll"> Rsvp & Ucapan</h2>
     <form id="rsvpForm">
       <input type="text" id="nama" placeholder="Nama Anda" required>
-      <!-- TEXTAREA KECIL 1 BARIS (48PX), TAPI AUTO EXPAND KALAU DIKETIK -->
       <textarea id="ucapan" placeholder="Tulis ucapan Anda..." required oninput="this.style.height='48px';this.style.height=this.scrollHeight+'px'"></textarea>
       <select id="kehadiran" required>
         <option value="">Konfirmasi Kehadiran</option>
@@ -1472,9 +1443,6 @@
 
 <div id="notif">🎉 Terima kasih atas ucapannya!</div>
 
-<!-- ========================================= -->
-<!-- AUDIO & MENU -->
-<!-- ========================================= -->
 <audio id="bgMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -1488,9 +1456,6 @@
   <a href="#rsvp" title="Ucapan"><i class="fa-solid fa-message"></i></a>
 </nav>
 
-<!-- ========================================= -->
-<!-- PENUTUP BAWAH (DESAIN BINGKAI GIANT VVIP & PARALLAX PENUTUP.WEBP) -->
-<!-- ========================================= -->
 <div class="ucapan-footer-bg section-parallax">
   <section id="ucapan">
     
@@ -1500,8 +1465,7 @@
         <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 458 A 12 12 0 0 0 290 470 L 290 478 A 12 12 0 0 1 278 490 C 242 490, 215 518, 170 518 C 125 518, 98 490, 62 490 A 12 12 0 0 1 50 478 L 50 470 A 12 12 0 0 0 38 458 L 38 82 A 12 12 0 0 0 50 70 L 50 62 A 12 12 0 0 1 62 50 C 98 50, 125 22, 170 22 Z" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
       </svg>
       <div class="vf-content">
-        <!-- ORNAMEN GUNUNGAN DI ATAS FOTO PENGANTIN (DIPERBESAR JADI 80PX) -->
-        <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan" loading="lazy" style="margin-bottom: 12px; margin-top: 0;">
+        <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan ikon-gunungan-penutup" loading="lazy" style="margin-bottom: 12px; margin-top: 0;">
         <img src="galeri1.webp" class="vf-photo" alt="Foto Couple" style="width: 58%; aspect-ratio: 3/4; object-fit: cover; border-radius: 1000px 1000px 0 0; border: 1.5px solid #5a6e82; margin-bottom: 25px; margin-top: 0;">
         <p class="ucapan-teks-penutup">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
@@ -1861,6 +1825,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Gunakan fungsi aman untuk setInterval agar tidak melempar event sebagai argument "forceFullReload"
   loadUcapan(true);
   setInterval(() => loadUcapan(false), 8000);
 
