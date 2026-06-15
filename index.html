@@ -52,9 +52,7 @@
       will-change: transform; 
     }
 
-    .cover-slide-up {
-      transform: translateY(-100%);
-    }
+    .cover-slide-up { transform: translateY(-100%); }
 
     #cover::after {
       content: '';
@@ -481,6 +479,15 @@
       .and-symbol { font-size: 46px; }
       .foto-mempelai-bingkai { width: 150px; height: 220px; } 
     }
+
+    /* ORNAMEN GUNUNGAN */
+    .ikon-gunungan {
+      width: 50px;
+      height: auto;
+      margin: 0 auto 10px auto;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
  
     /* =========================================
        COUNTDOWN SECTION BOKEH (KUNANG-KUNANG)
@@ -671,7 +678,7 @@
       font-size: 36px;
       color: #f3a302;
       margin-bottom: 30px;
-      margin-top: 20px;
+      margin-top: 10px;
       text-align: center;
       font-weight: normal;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -693,7 +700,7 @@
     .tombol-maps a:hover { background-color: #f3a302; color: #3a0606; }
 
     /* =========================================
-       GALERI SECTION & ANIMASI GARIS BURGUNDY GRUP VVIP
+       GALERI SECTION & ORNAMEN WAYANG
        ========================================= */
     .galeri-section {
       padding: 60px 20px;
@@ -706,6 +713,31 @@
       margin-bottom: 0px;
       min-height: 100vh;
       overflow: hidden; 
+      position: relative; /* Wadah untuk wayang */
+    }
+
+    /* ORNAMEN WAYANG BACKGROUND GALERI */
+    .hiasan-wayang {
+      position: absolute;
+      z-index: 1; /* Di bawah galeri grid (z-index 2) */
+      width: 140px; /* Ukuran sedengan */
+      opacity: 0.6; /* Transparan agar tidak terlalu mencolok */
+      pointer-events: none;
+    }
+    .wayang-kiri {
+      top: 35%;
+      left: -20px;
+      transform: rotate(15deg); /* Miring menghadap dalam (kanan) */
+    }
+    .wayang-kanan-1 {
+      top: 15%;
+      right: -20px;
+      transform: scaleX(-1) rotate(15deg); /* Flip horizontal dan miring hadap dalam (kiri) */
+    }
+    .wayang-kanan-2 {
+      bottom: 25%;
+      right: -20px;
+      transform: scaleX(-1) rotate(15deg); /* Flip horizontal dan miring hadap dalam (kiri) */
     }
 
     /* Teks Galeri Burgundy Center */
@@ -715,6 +747,8 @@
       color: #580b0b; 
       margin-bottom: 30px;
       text-align: center;
+      position: relative;
+      z-index: 2;
     }
 
     .marquee-container {
@@ -730,6 +764,7 @@
       margin-bottom: 40px;
       background: rgba(255, 255, 255, 0.1);
       box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+      z-index: 2;
     }
 
     .marquee-track {
@@ -763,97 +798,27 @@
       gap: 15px;
       max-width: 1000px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2; /* Menjaga foto di atas wayang */
     }
 
-    /* ANIMASI GARIS TEPI BURGUNDY DENGAN SISTEM GRUP (ANTI-LAG) */
+    /* ITEM GALERI KEMBALI BERSIH, RINGAN, TANPA ANIMASI BERAT */
     .galeri-item {
       background: white;
-      padding: 8px; /* Memberikan jarak/bingkai putih sebelum garis tepi foto */
+      padding: 8px; /* Bingkai putih elegan */
       border-radius: 20px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       position: relative;
       overflow: hidden;
-      transform: translateZ(0); /* Anti lag / Hardware Acceleration */
-    }
-    
-    .galeri-item::before {
-      content: "";
-      position: absolute;
-      width: 200%; height: 200%;
-      top: -50%; left: -50%;
-      background: conic-gradient(from 0deg, transparent 75%, #580b0b 100%); /* Cahaya Burgundy */
-      display: none; 
-      z-index: 1;
-    }
-
-    .galeri-item::after {
-      content: "";
-      position: absolute;
-      inset: 4px; /* Ketebalan batas putih/garis animasi */
-      background: #fff;
-      border-radius: 16px;
-      z-index: 2;
+      transform: translateZ(0);
     }
 
     .galeri-item img {
       position: relative;
-      z-index: 10; 
       width: 100%; height: 100%; object-fit: cover; border-radius: 12px;
       transition: transform 0.3s ease; cursor: pointer;
     }
     .galeri-item img:hover { transform: scale(1.03); }
-
-    /* SISTEM ANIMASI KELOMPOK/GRUP 
-      Total Siklus: 9 Detik
-      Masing-masing grup menyala 3 detik, lalu mati (opacity 0) selama 6 detik.
-    */
-    @keyframes spin-grup1 {
-      0% { transform: rotate(0deg); opacity: 1; }
-      33.33% { transform: rotate(360deg); opacity: 1; }
-      33.34% { opacity: 0; }
-      100% { transform: rotate(360deg); opacity: 0; }
-    }
-    
-    @keyframes spin-grup2 {
-      0% { transform: rotate(0deg); opacity: 0; }
-      33.33% { opacity: 0; }
-      33.34% { transform: rotate(0deg); opacity: 1; }
-      66.66% { transform: rotate(-360deg); opacity: 1; } /* Bergerak berlawanan arah */
-      66.67% { opacity: 0; }
-      100% { opacity: 0; }
-    }
-    
-    @keyframes spin-grup3 {
-      0% { transform: rotate(0deg); opacity: 0; }
-      66.66% { opacity: 0; }
-      66.67% { transform: rotate(0deg); opacity: 1; }
-      100% { transform: rotate(360deg); opacity: 1; }
-    }
-
-    /* Trigger: Animasi hanya menyala saat user menatap layar (Class is-visible aktif) */
-    
-    /* GRUP 1 (Galeri 1, 3, 6) - Nyala Pertama */
-    .galeri-section.is-visible .galeri-item:nth-child(1)::before,
-    .galeri-section.is-visible .galeri-item:nth-child(3)::before,
-    .galeri-section.is-visible .galeri-item:nth-child(6)::before {
-      display: block;
-      animation: spin-grup1 9s linear infinite;
-    }
-
-    /* GRUP 2 (Galeri 2, 4, 7) - Nyala Kedua */
-    .galeri-section.is-visible .galeri-item:nth-child(2)::before,
-    .galeri-section.is-visible .galeri-item:nth-child(4)::before,
-    .galeri-section.is-visible .galeri-item:nth-child(7)::before {
-      display: block;
-      animation: spin-grup2 9s linear infinite;
-    }
-
-    /* GRUP 3 (Galeri 5, 8) - Nyala Ketiga */
-    .galeri-section.is-visible .galeri-item:nth-child(5)::before,
-    .galeri-section.is-visible .galeri-item:nth-child(8)::before {
-      display: block;
-      animation: spin-grup3 9s linear infinite;
-    }
 
     .galeri-item.large { grid-column: span 2; aspect-ratio: 16 / 9; }
     .galeri-item.small { grid-column: span 1; aspect-ratio: 1 / 1; }
@@ -955,7 +920,7 @@
       border-radius: 180px; /* Bentuk kapsul memanjang */
       max-width: 360px;
       width: 90vw;
-      padding: 80px 20px 60px; /* PADDING ATAS 80PX AGAR ATM TIDAK MEPET */
+      padding: 60px 20px 60px; /* Lebar dan panjang proporsional */
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
       margin: 0 auto 40px auto; 
       display: flex;
@@ -993,7 +958,6 @@
       text-align: center;
       color: #354a5f;
     }
-    .gift-ornament { width: 60px; margin-bottom: 5px; }
     .gift-confirm-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; margin-bottom: 5px; color: #354a5f; }
     .gift-confirm-subtitle { font-family: 'Poppins', sans-serif; font-size: 11px; margin-bottom: 25px; font-style: italic; opacity: 0.9; line-height: 1.5; color: #354a5f; }
     
@@ -1068,7 +1032,7 @@
     }
     .ucapan-item small { opacity: 0.8; font-size: 13px; color: #5a6e82; }
 
-    /* CSS PAGINASI UCAPAN (Bug Auto-Refresh Diperbaiki) */
+    /* CSS PAGINASI UCAPAN (Bug Auto-Refresh Diperbaiki Mutlak) */
     .pagination-container {
       display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap;
     }
@@ -1295,6 +1259,8 @@
 
 <section class="acara section-parallax" style="padding: 40px 20px;">
   <div class="box-acara animasi-scroll">
+    <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan animasi-scroll" data-anim="zoom-up" loading="lazy">
+    
     <p class="judul animasi-scroll" data-anim="zoom-up">Resepsi Pernikahan</p>
     <p class="tglacara animasi-scroll" data-anim="zoom-up">Minggu, 19 Juli 2026</p>
     <p class="waktuacara animasi-scroll" data-anim="zoom-up">Pukul 10:00 WIB <br> Acara 18 - 19 Juli 2026</p>
@@ -1307,6 +1273,11 @@
 </section>
 
 <section id="galeri-section" class="galeri-section">
+  
+  <img src="wayang.webp" alt="Wayang Kiri" class="hiasan-wayang wayang-kiri" loading="lazy">
+  <img src="wayang.webp" alt="Wayang Kanan Atas" class="hiasan-wayang wayang-kanan-1" loading="lazy">
+  <img src="wayang.webp" alt="Wayang Kanan Bawah" class="hiasan-wayang wayang-kanan-2" loading="lazy">
+
   <h2 class="galeri-title animasi-scroll">Galeri</h2>
 
   <div class="marquee-container animasi-scroll" data-anim="zoom-up">
@@ -1376,8 +1347,10 @@
 
   <div class="box-gift-pill animasi-scroll" data-anim="up">
       
+      <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan animasi-scroll" data-anim="zoom-up" loading="lazy" style="margin-bottom: 25px;">
+      
       <div class="atm-card" data-rek="1122 3344 5566" style="display: none !important;">
-        <div class="bank-logo"><img src="bank.webp" alt="SeaBank Logo" loading="lazy" decoding="async"></div>
+        <div class="bank-logo"><img src="bank.webp" alt="Bank Logo" loading="lazy" decoding="async"></div>
         <div class="atm-chip"></div>
         <div class="rek-number">1122 3344 5566</div>
         <div class="rek-name">Nadia Shafira</div>
@@ -1385,7 +1358,7 @@
       </div>
 
       <div class="atm-card" data-rek="000901148352509">
-        <div class="bank-logo"><img src="bankbri.webp" alt="Bank Logo" loading="lazy" decoding="async"></div>
+        <div class="bank-logo"><img src="bank.webp" alt="Bank Logo" loading="lazy" decoding="async"></div>
         <div class="atm-chip"></div>
         <div class="rek-number">0009 0114 8352 509</div>
         <div class="rek-name">Sinta Wulan Dari</div>
@@ -1393,8 +1366,6 @@
       </div>
 
       <div class="gift-confirm-box">
-        <img src="ornamen.png" alt="Ornamen" class="gift-ornament" loading="lazy" onerror="this.style.display='none'">
-        
         <h3 class="gift-confirm-title">
           <span style="font-family: 'Great Vibes', cursive; font-size: 38px;">Gift</span> Confirm
         </h3>
@@ -1497,19 +1468,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
-
-  // === OBSERVER KHUSUS GALERI (ANTI LAG & AUTO PAUSE) ===
-  const galeriSection = document.getElementById('galeri-section');
-  const galeriObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-      } else {
-        entry.target.classList.remove('is-visible');
-      }
-    });
-  }, { threshold: 0.1 });
-  if (galeriSection) galeriObserver.observe(galeriSection);
 
   // === TOMBOL SALIN REKENING ===
   document.addEventListener("click", function (e) {
@@ -1624,7 +1582,6 @@ document.addEventListener("DOMContentLoaded", () => {
     bgVideo.addEventListener("timeupdate", () => {
       // 1. Detik 4: Memicu Seluruh Rantai Animasi Bingkai VVIP
       if (bgVideo.currentTime >= 4 && videoOverlay) {
-        // Class ini akan menjalankan urutan di CSS: Kaca -> Garis Menyambung -> Foto -> Teks
         videoOverlay.classList.add("show-frame");
       }
       
@@ -1807,17 +1764,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let i = 1; i <= totalPages; i++) {
       const btn = document.createElement("button");
-      btn.type = "button"; // FIX: Cegah fungsi submit pada tombol paginasi
+      btn.type = "button"; // FIX MUTLAK: Mencegah tombol paginasi bertindak sebagai tombol submit
       btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
       btn.textContent = i;
       
       btn.addEventListener("click", function(e) {
-        e.preventDefault(); 
+        e.preventDefault(); // Mencegah reload halaman
         currentPage = i;
         renderUcapan();
         renderPagination();
         
-        // AUTO SCROLL FIX: Layar tertahan mulus di list ucapan (Anti Anjlok)
+        // AUTO SCROLL FIX: Layar bergeser mulus dan mengunci di judul "Ucapan & Kehadiran"
         document.getElementById("ucapanList").scrollIntoView({ behavior: "smooth", block: "start" });
       });
       
@@ -1840,7 +1797,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Gunakan fungsi aman untuk setInterval agar tidak melempar event sebagai argument "forceFullReload"
   loadUcapan(true);
   setInterval(() => loadUcapan(false), 8000);
 
