@@ -430,15 +430,47 @@
       transform: translateZ(0);
     }
 
+    /* BINGKAI WRAPPER UNTUK BUNGA & FOTO */
+    .bingkai-wrapper {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto 15px auto; /* Margin dipindah dari foto-mempelai-bingkai ke sini */
+    }
+
     .foto-mempelai-bingkai {
       width: 170px;
       height: 250px;
       object-fit: cover;
       border-radius: 100px; 
       border: 4px solid #354a5f; 
-      margin: 0 auto 15px auto;
       display: block;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 2; /* Menempatkan foto di atas bunga */
+      margin: 0; 
+    }
+
+    /* CSS ORNAMEN BUNGA */
+    .bunga-hiasan {
+      position: absolute;
+      z-index: 1; /* Menempatkan bunga di belakang foto */
+      width: 120px; /* Ukuran yang pas untuk menjorok keluar */
+      pointer-events: none; /* Mencegah bunga menghalangi klik pada area tersebut */
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.25)); /* Memberi efek nyata/hidup */
+    }
+
+    /* Posisi Kiri: Agak ke atas dan miring rotasi ke luar */
+    .bunga-kiri {
+      top: -15px;
+      left: -55px;
+      transform: rotate(-35deg);
+    }
+
+    /* Posisi Kanan: Agak ke bawah dan miring rotasi ke luar (Asimetris / Tidak Sejajar) */
+    .bunga-kanan {
+      bottom: 15px;
+      right: -55px;
+      transform: rotate(45deg);
     }
 
     .nama-pengantin {
@@ -1260,19 +1292,33 @@
 
   <div class="box-putih-kecil animasi-scroll">
     <div class="profilx">
+      
       <div class="pengantinx animasi-scroll">
-        <img src="foto-wanita.webp" class="foto-mempelai-bingkai" alt="Foto Sinta" loading="lazy" decoding="async">
+        <div class="bingkai-wrapper">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kiri" alt="Bunga Kiri" loading="lazy">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kanan" alt="Bunga Kanan" loading="lazy">
+          <img src="foto-wanita.webp" class="foto-mempelai-bingkai" alt="Foto Sinta" loading="lazy" decoding="async">
+        </div>
+        
         <h2 class="nama-pengantin">SINTA WULAN DARI</h2>
         <p class="orang-tua">Putri dari<br>Bpk. Agus Triono & Ibu Titik Setia Rokhani</p>
         <p class="alamat0">Dsn. Bintang RT 1 / RW 1<br>Ds. Ngaringan, Kec. Gandusari</p>
       </div>
+
       <div class="and-symbol animasi-scroll">&</div>
+      
       <div class="pengantinx animasi-scroll">
-        <img src="foto-pria.webp" class="foto-mempelai-bingkai" alt="Foto Billy" loading="lazy" decoding="async">
+        <div class="bingkai-wrapper">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kiri" alt="Bunga Kiri" loading="lazy">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kanan" alt="Bunga Kanan" loading="lazy">
+          <img src="foto-pria.webp" class="foto-mempelai-bingkai" alt="Foto Billy" loading="lazy" decoding="async">
+        </div>
+
         <h2 class="nama-pengantin">BILLY FADE LEONA</h2>
         <p class="orang-tua">Putra dari<br>Bpk. Sutiman & Ibu Sutarti</p>
         <p class="alamat0">Dusun Tirtomoyo RT 2/RW 1<br>Desa Krisik, Kec. Gandusari</p>
       </div>
+
     </div>
   </div>
 
