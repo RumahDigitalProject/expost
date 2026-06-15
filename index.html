@@ -35,6 +35,27 @@
     body.lock-scroll { overflow: hidden !important; height: 100vh; }
 
     /* =========================================
+       ANIMASI PEMBUKA SINEMATIK (COVER TEKS)
+       ========================================= */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes zoomInSmooth {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .anim-fade-up {
+      opacity: 0;
+      animation: fadeInUp 1.2s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    }
+    .anim-zoom-in {
+      opacity: 0;
+      animation: zoomInSmooth 1.5s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+    }
+
+    /* =========================================
        COVER / HALAMAN PEMBUKA (SLIDE UP ANIMATION)
        ========================================= */
     #cover {
@@ -82,6 +103,7 @@
       margin: 0;
       margin-top: 60px;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+      animation-delay: 0.2s; /* Efek berurutan */
     }
 
     #cover-content .names {
@@ -90,6 +112,7 @@
       margin: 5px 0 0 0;
       text-align: center;
       text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      animation-delay: 0.6s;
     }
 
     .bottom-area {
@@ -104,6 +127,7 @@
       font-size: 1.1em;
       margin: 0;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+      animation-delay: 1s;
     }
 
     .nama-tamu {
@@ -115,20 +139,23 @@
       text-transform: capitalize;
       transition: opacity 0.5s ease;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+      animation-delay: 1.3s;
     }
 
     .nama-tamu.hidden {
-      opacity: 0;
+      opacity: 0 !important;
       height: 0;
       margin: 0;
       padding: 0;
       overflow: hidden;
+      animation: none !important;
     }
 
     .di-tempat {
       font-size: 1.1em;
       margin: 0 0 15px 0;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+      animation-delay: 1.6s;
     }
 
     .btn-open {
@@ -148,6 +175,7 @@
       font-family: 'Playfair Display', serif;
       letter-spacing: 0.5px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      animation-delay: 1.9s;
     }
 
     .btn-open:hover { 
@@ -301,6 +329,16 @@
       letter-spacing: 1px;
     }
 
+    .vf-clip-container {
+      width: 58%;
+      aspect-ratio: 3/4;
+      margin-bottom: 25px;
+      margin-top: 0;
+      overflow: hidden;
+      border-radius: 1000px 1000px 0 0;
+      border: 1.5px solid #5a6e82;
+    }
+
     .vf-date {
       font-family: 'Poppins', sans-serif;
       font-size: 11px;
@@ -354,6 +392,7 @@
     /* MAPPING GAMBAR PARALLAX KOREKSI FINAL */
     #invitation1.section-parallax::before { background-image: url('galeri8.webp'); }
     .acara.section-parallax::before { background-image: url('galeri8.webp'); } 
+    #gift.section-parallax::before { background-image: url('galeri8.webp'); } /* GIFT PARALLAX GALERI8 */
     #rsvp.section-parallax::before { background-image: url('galeri8.webp'); } 
     .ucapan-footer-bg.section-parallax::before { background-image: url('penutup.webp'); } 
 
@@ -470,30 +509,17 @@
       font-style: normal;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      #cover-content .names { font-size: 2.2em; }
-      .and-symbol { font-size: 50px; }
-    }
-
-    @media (max-width: 480px) {
-      #cover-content .names { font-size: 2em; }
-      .and-symbol { font-size: 46px; }
-      .foto-mempelai-bingkai { width: 150px; height: 220px; } 
-    }
-
     /* ORNAMEN GUNUNGAN */
     .ikon-gunungan {
-      width: 80px; /* Sesuai kesepakatan diperbesar 80px */
+      width: 80px; 
       height: auto;
       margin: 0 auto 10px auto;
       display: block;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
     
-    /* Gunungan Penutup Khusus Kecil */
     .ikon-gunungan-penutup {
-      width: 50px !important; /* Dibuat 50px sesuai permintaan terakhir khusus penutup */
+      width: 50px !important; 
     }
  
     /* =========================================
@@ -631,10 +657,10 @@
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(243, 163, 2, 0.5); 
-      border-radius: 180px; /* Bentuk kapsul yang tidak terpotong */
+      border-radius: 180px; 
       max-width: 380px;
       width: 100%;
-      padding: 60px 24px; /* Padding sangat lega atas-bawah agar konten tidak terpotong */
+      padding: 60px 24px; 
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       text-align: center;
       color: #ffffff;
@@ -706,7 +732,7 @@
     .tombol-maps a:hover { background-color: #f3a302; color: #3a0606; }
 
     /* =========================================
-       GALERI SECTION & ORNAMEN WAYANG STATIS 
+       GALERI SECTION & ORNAMEN WAYANG 200PX
        ========================================= */
     .galeri-section {
       padding: 60px 20px;
@@ -722,11 +748,10 @@
       position: relative; 
     }
 
-    /* ORNAMEN WAYANG (UKURAN 200PX FORMASI 3-2) */
     .hiasan-wayang {
       position: absolute;
-      z-index: 1; /* Di bawah foto galeri */
-      width: 200px; /* Sesuai instruksi diperkecil dari 250px */
+      z-index: 1; 
+      width: 200px; 
       opacity: 0.6; 
       pointer-events: none;
     }
@@ -738,7 +763,6 @@
     .wayang-kanan-1 { top: 20%; right: -50px; transform: scaleX(-1) rotate(15deg); }
     .wayang-kanan-2 { bottom: 20%; right: -50px; transform: scaleX(-1) rotate(15deg); }
 
-    /* Teks Galeri Burgundy Center */
     .galeri-title {
       font-family: 'Great Vibes', cursive;
       font-size: 50px;
@@ -774,11 +798,6 @@
       transform: translateZ(0); 
     }
 
-    @keyframes scrollLTR {
-      0% { transform: translateX(calc(-50% - 7.5px)) translateZ(0); }
-      100% { transform: translateX(0) translateZ(0); }
-    }
-
     .marquee-track img {
       height: 160px;
       width: auto;
@@ -800,10 +819,9 @@
       z-index: 2; 
     }
 
-    /* ITEM GALERI BERSIH & SANGAT RINGAN TANPA ANIMASI */
     .galeri-item {
       background: white;
-      padding: 8px; /* Bingkai putih elegan */
+      padding: 8px; 
       border-radius: 20px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       position: relative;
@@ -827,88 +845,15 @@
       .marquee-track img { height: 120px; } 
     }
 
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 10000;
-      left: 0; top: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(8px);
-      justify-content: center;
-      align-items: center;
-    }
-    .lightbox-img {
-      max-width: 90%;
-      max-height: 85%;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      transition: transform 0.4s ease;
-    }
-    .close {
-      position: absolute; top: 20px; right: 30px;
-      color: white; font-size: 45px; font-weight: bold;
-      cursor: pointer; z-index: 10001;
-    }
-    .prev, .next {
-      position: absolute; top: 50%;
-      color: white; font-size: 30px; font-weight: bold;
-      padding: 10px 15px; cursor: pointer; user-select: none;
-      transform: translateY(-50%); border-radius: 50%;
-      background: rgba(0,0,0,0.4); transition: background 0.3s, color 0.3s;
-      z-index: 10001;
-    }
-    .prev:hover, .next:hover { background: rgba(255,204,0,0.8); color: black; }
-    .prev { left: 15px; }
-    .next { right: 15px; }
-
     /* =========================================
-       GIFT SECTION (WEDDING GIFT - KAPSUL)
+       GIFT SECTION (WEDDING GIFT - PARALLAX VVIP)
        ========================================= */
     #gift {
-      position: relative;
-      overflow: hidden;
-      padding: 60px 20px;
-      text-align: center;
-      color: #354a5f;
-      background-image: url('dasar.webp');
-      background-size: contain;
       background-color: #ffffff;
       min-height: auto;
-      z-index: 0;
-    }
-    #gift::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url('dasar.webp');
-      background-size: contain;
-      background-position: top center;
-      background-repeat: repeat-y;
-      opacity: 1; 
-      z-index: -1;
     }
 
-    .GIFT-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: 42px;
-      color: #354a5f;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    .gift-thanks {
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      opacity: 0.9;
-      margin-bottom: 55px; 
-      font-style: italic;
-      max-width: 600px;
-      margin-left: auto; margin-right: auto;
-      text-align: center; 
-    }
-
-    /* KAPSUL BINGKAI RAKSASA WEDDING GIFT + BACKGROUND BLUR GALERI8 YG LEBIH JELAS */
+    /* KAPSUL BINGKAI RAKSASA WEDDING GIFT + BLUR OVERLAY CERAH */
     .box-gift-pill {
       border: 3px solid #354a5f; 
       outline: 2px solid #354a5f; 
@@ -927,22 +872,22 @@
       z-index: 1;
     }
 
-    /* Background galeri8.webp di-blur ringan */
+    /* Background galeri8.webp di-blur ringan di dalam Kapsul */
     .box-gift-pill::before {
       content: "";
       position: absolute;
       inset: -10px; 
       background: url('galeri8.webp') center center / cover no-repeat;
-      filter: blur(2px); /* Blur tipis agar foto jelas */
+      filter: blur(2px); 
       z-index: -2;
     }
 
-    /* Overlay Warna Putih Tipis Supaya Foto Menyeluruh Terlihat Jelas */
+    /* Overlay Cerah Transparan 0.55 */
     .box-gift-pill::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.55); /* Transparan 0.55 (lebih tipis) */
+      background: rgba(255, 255, 255, 0.55); 
       z-index: -1;
     }
 
@@ -951,7 +896,6 @@
       z-index: 2;
     }
 
-    /* KARTU ATM (DIPERKECIL AGAR MASUK KAPSUL SECARA HARMONIS) */
     .atm-card {
       width: 100%; max-width: 250px; height: 145px; margin: 0 auto 20px;
       border-radius: 12px; padding: 12px; position: relative; color: #fff;
@@ -975,7 +919,6 @@
       border: none; color: #1c1400; font-weight: bold;
     }
 
-    /* FORM KONFIRMASI MENYATU */
     .gift-confirm-box {
       width: 100%;
       text-align: center;
@@ -1000,35 +943,41 @@
     .btn-konfirmasi:hover { background: #233b53; transform: scale(1.03); }
 
     /* =========================================
-       RSVP (KACA CERAH BLUR TIPIS & TEKS TENGAH)
+       RSVP (KOREKSI: KACA GELAP LUXURY SEPERTI ACARA RELEVAN)
        ========================================= */
     #rsvp {
       display: flex;
       justify-content: center; align-items: center; padding: 40px 20px;
       position: relative; z-index: 1;
     }
+    
+    /* Judul RSVP Selaras Dengan Resepsi Emas Cerah */
     .RSVP-title {
-      font-family: 'Great Vibes', cursive; font-size: 38px; color: #354a5f; 
+      font-family: 'Great Vibes', cursive; 
+      font-size: 38px; 
+      color: #f3a302; 
       margin-bottom: 30px;
-      text-align: center; 
+      text-align: center;
       width: 100%;
       display: block;
-    }
-    .rsvp-container {
-      background: rgba(255, 255, 255, 0.65); 
-      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); 
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      padding: 30px; border-radius: 20px; max-width: 600px; margin: 0 auto; width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      -webkit-backface-visibility: hidden; transform: translateZ(0);
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
-    /* Pengunci Lebar Input RSVP Anti Meluber */
+    /* Ganti Warna Background, Blur & Border Sesuai Box Acara */
+    .rsvp-container {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(243, 163, 2, 0.5); 
+      padding: 30px; border-radius: 20px; max-width: 600px; margin: 0 auto; width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      color: #ffffff;
+    }
+    
     #rsvp input, #rsvp select, #rsvp textarea, #rsvp button {
       width: 100%; 
       max-width: 100%; 
       box-sizing: border-box; 
-      padding: 12px; margin-top: 10px; border: 1px solid rgba(255,255,255,0.5);
+      padding: 12px; margin-top: 10px; border: 1px solid rgba(243,163,2,0.3);
       border-radius: 10px; font-size: 16px;
       font-family: 'Poppins', sans-serif;
     }
@@ -1041,53 +990,47 @@
     } 
 
     #rsvp input, #rsvp textarea, #rsvp select { background: rgba(255,255,255,0.9); color: #333; }
+    
+    /* Tombol warna emas/biru relevan biar megah */
     #rsvp button {
-      background: #354a5f; color: #ffffff; font-weight: 600; cursor: pointer; transition: 0.3s; border: none;
+      background: rgba(243, 163, 2, 0.85); color: #ffffff; font-weight: 600; cursor: pointer; transition: 0.3s; border: none;
     }
-    #rsvp button:hover { background: #233b53; transform: scale(1.03); }
+    #rsvp button:hover { background: rgba(243, 163, 2, 1); transform: scale(1.02); }
     
     .ucapan-list { margin-top: 30px; text-align: left; }
+    
     .ucapan-item {
-      background: rgba(255, 255, 255, 0.8); border-radius: 12px; padding: 15px;
+      background: rgba(255, 255, 255, 0.85); border-radius: 12px; padding: 15px;
       margin-bottom: 10px; animation: fadeIn 0.6s ease;
-      color: #333; border-left: 4px solid #354a5f;
+      color: #333; border-left: 4px solid #f3a302;
     }
     .ucapan-item small { opacity: 0.8; font-size: 13px; color: #5a6e82; }
 
-    /* CSS PAGINASI UCAPAN (Bug Auto-Refresh Diperbaiki Mutlak) */
     .pagination-container {
       display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap;
     }
     .page-btn {
-      background: rgba(255, 255, 255, 0.8) !important; border: 1px solid #354a5f !important;
+      background: rgba(255, 255, 255, 0.8) !important; border: 1px solid #f3a302 !important;
       color: #354a5f !important; padding: 6px 12px !important; border-radius: 6px !important;
       cursor: pointer; font-family: 'Poppins', sans-serif !important; font-size: 14px !important;
       transition: all 0.3s ease; width: auto !important; margin-top: 0 !important;
     }
-    .page-btn.active, .page-btn:hover { background: #354a5f !important; color: #ffffff !important; font-weight: bold; }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    /* Notifikasi */
-    #notif {
-      position: fixed; top: 20px; right: 20px; background: #354a5f; color: #ffffff;
-      padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      opacity: 0; transform: translateY(-20px); transition: all 0.4s ease;
-      font-weight: 600; z-index: 9999;
-    }
-    #notif.show { opacity: 1; transform: translateY(0); }
+    .page-btn.active, .page-btn:hover { background: #f3a302 !important; color: #ffffff !important; font-weight: bold; }
 
     /* FOOTER */
     .footer-wedding {
       color: #f7e9e9; text-align: center; padding: 80px 20px 100px; font-family: "Poppins", sans-serif;
     }
+    
+    /* KOREKSI: WARNA BRAND BAWAH DIUBAH HITAM PEKAT */
     .footer-brand {
-      font-size: 20px; font-weight: 600; background: linear-gradient(90deg, #f7d4d4, #f3bcbc);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 25px;
+      font-size: 20px; 
+      font-weight: 600; 
+      color: #000000 !important;
+      -webkit-text-fill-color: #000000 !important; 
+      margin-bottom: 25px;
     }
+    
     .footer-icons { display: flex; justify-content: center; gap: 18px; margin-bottom: 25px; }
     .footer-icons a {
       background-color: #f7e9e9; color: #4a1f28; font-size: 18px; width: 42px; height: 42px;
@@ -1126,9 +1069,7 @@
     [data-anim="zoom-up"] { opacity: 0; transform: scale(0.8) translateY(40px) translateZ(0); }
     .animasi-scroll.muncul[data-anim="zoom-up"] { opacity: 1; transform: scale(1) translateY(0) translateZ(0); }
     
-    /* =========================================
-       BINGKAI PENUTUP BAWAH (ANTI-SHRINK LEGA VVIP)
-       ========================================= */
+    /* BINGKAI PENUTUP BAWAH */
     .frame-penutup {
       margin: 0 auto !important;
       pointer-events: auto !important;
@@ -1155,7 +1096,6 @@
       font-weight: 500;
     }
     
-    /* RESET SEKSI UCAPAN BIAR TIDAK MENJEPIT BINGKAI */
     #ucapan {
       padding: 60px 0 !important; 
       width: 100vw !important;
@@ -1170,14 +1110,14 @@
 <div id="cover">
   <div id="cover-content">
     <div>
-      <p class="title">The Wedding Of</p>
-      <h1 class="names">Sinta & Billy</h1>
+      <p class="title anim-fade-up">The Wedding Of</p>
+      <h1 class="names anim-zoom-in">Sinta & Billy</h1>
     </div>
     <div class="bottom-area">
-      <p class="guest">Kepada Bapak/Ibu/Saudara/i</p>
-      <h3 id="namaTamu" class="nama-tamu"></h3>
-      <p class="di-tempat">Di Tempat</p>
-      <button class="btn-open" id="openBtn">
+      <p class="guest anim-fade-up">Kepada Bapak/Ibu/Saudara/i</p>
+      <h3 id="namaTamu" class="nama-tamu anim-zoom-in"></h3>
+      <p class="di-tempat anim-fade-up">Di Tempat</p>
+      <button class="btn-open anim-fade-up" id="openBtn">
         <i class="fa-solid fa-envelope"></i> Buka Undangan
       </button>
     </div>
@@ -1353,14 +1293,7 @@
   </div>
 </section>
 
-<div id="lightbox" class="lightbox">
-  <span class="close">×</span>
-  <img class="lightbox-img" src="">
-  <a class="prev">❮</a>
-  <a class="next">❯</a>
-</div>
-
-<section id="gift" class="section">
+<section id="gift" class="section section-parallax">
   <div class="animasi-scroll" data-anim="up" style="position: relative; z-index: 2;">
     <h2 class="GIFT-title">Wedding Gift</h2>
     <p class="gift-thanks">
@@ -1370,7 +1303,6 @@
   </div>
 
   <div class="box-gift-pill animasi-scroll" data-anim="up">
-      
       <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan animasi-scroll" data-anim="zoom-up" loading="lazy" style="margin-bottom: 25px;">
       
       <div class="atm-card" data-rek="1122 3344 5566" style="display: none !important;">
@@ -1391,7 +1323,6 @@
 
       <div class="gift-confirm-box">
         <img src="ornamen.png" alt="Ornamen" class="gift-ornament" loading="lazy" onerror="this.style.display='none'">
-        
         <h3 class="gift-confirm-title">
           <span style="font-family: 'Great Vibes', cursive; font-size: 38px;">Gift</span> Confirm
         </h3>
@@ -1410,18 +1341,15 @@
             <label>Ucapan :</label>
             <input type="text" id="tfUcapan" placeholder="Ucapan" required>
           </div>
-          <button type="submit" class="btn-konfirmasi">
-            Konfirmasi
-          </button>
+          <button type="submit" class="btn-konfirmasi">Konfirmasi</button>
         </form>
       </div>
-
   </div>
 </section>
 
 <section id="rsvp" class="section-parallax">
   <div class="rsvp-container">
-    <h2 class="RSVP-title animasi-scroll"> Rsvp & Ucapan</h2>
+    <h2 class="RSVP-title animasi-scroll">Rsvp & Ucapan</h2>
     <form id="rsvpForm">
       <input type="text" id="nama" placeholder="Nama Anda" required>
       <textarea id="ucapan" placeholder="Tulis ucapan Anda..." required oninput="this.style.height='48px';this.style.height=this.scrollHeight+'px'"></textarea>
@@ -1434,8 +1362,8 @@
     </form>
     
     <div class="ucapan-list" id="ucapanList">
-      <h3 style="margin-top:30px; color: #354a5f; text-align: left;">Ucapan & Kehadiran</h3>
-      <div id="list"><p style="opacity:0.8; text-align:center; color: #333;">Memuat ucapan... 😇</p></div>
+      <h3 style="margin-top:30px; color: #f3a302; text-align: left;">Ucapan & Kehadiran</h3>
+      <div id="list"><p style="opacity:0.8; text-align:center; color: #fff;">Memuat ucapan... 😇</p></div>
       <div id="pagination" class="pagination-container"></div>
     </div>
   </div>
@@ -1458,7 +1386,6 @@
 
 <div class="ucapan-footer-bg section-parallax">
   <section id="ucapan">
-    
     <div class="vintage-frame-container frame-penutup animasi-scroll" data-anim="zoom-up">
       <svg class="vf-svg-bg" viewBox="0 0 340 540" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M 170 10 C 220 10, 250 40, 290 40 A 15 15 0 0 1 305 55 L 305 65 A 15 15 0 0 0 320 80 L 320 460 A 15 15 0 0 0 305 475 L 305 485 A 15 15 0 0 1 290 500 C 250 500, 220 530, 170 530 C 120 530, 90 500, 50 500 A 15 15 0 0 1 35 485 L 35 475 A 15 15 0 0 0 20 460 L 20 80 A 15 15 0 0 0 35 65 L 35 55 A 15 15 0 0 1 50 40 C 90 40, 120 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
@@ -1496,6 +1423,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
 
+  // === OBSERVER KHUSUS GALERI (ANTI LAG & AUTO PAUSE) ===
+  const galeriSection = document.getElementById('galeri-section');
+  const galeriObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      } else {
+        entry.target.classList.remove('is-visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  if (galeriSection) galeriObserver.observe(galeriSection);
+
   // === TOMBOL SALIN REKENING ===
   document.addEventListener("click", function (e) {
     const btn = e.target.closest(".copy-btn");
@@ -1531,7 +1471,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const nominal = document.getElementById("tfNominal").value;
       const ucapan = document.getElementById("tfUcapan").value;
       
-      // Nomor WA Tujuan Update
       const phone = "6285706889273";
       
       let message = `Halo, saya telah mengirimkan kado pernikahan (Gift) dengan rincian:\n\n`;
@@ -1560,7 +1499,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === BUKA UNDANGAN (COVER SLIDE UP, MUSIC & SENSOR VIDEO VVIP) ===
+  // === BUKA UNDANGAN ===
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
   const invitation = document.getElementById("invitation1") || document.querySelector(".invitation1");
@@ -1585,11 +1524,8 @@ document.addEventListener("DOMContentLoaded", () => {
     openBtn.addEventListener("click", () => {
       document.body.classList.remove("lock-scroll");
       invitation.style.display = "block"; 
-      
-      // Memicu CSS transition Cover Terangkat ke atas (Slide up)
       cover.classList.add("cover-slide-up");
       
-      // Video langsung otomatis jalan sesaat setelah tombol diklik
       if (bgVideo) {
         bgVideo.play();
       }
@@ -1597,7 +1533,6 @@ document.addEventListener("DOMContentLoaded", () => {
       isOpened = true;
       safePlay(); 
       
-      // Setelah animasi cover 1.2 detik selesai, hilangkan elemennya sepenuhnya
       setTimeout(() => {
         cover.style.display = "none";
       }, 1200); 
@@ -1607,19 +1542,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // === TIMELINE SENSOR VIDEO ANIMASI SEKUENSIAL ===
   if (bgVideo) {
     bgVideo.addEventListener("timeupdate", () => {
-      // 1. Detik 4: Memicu Seluruh Rantai Animasi Bingkai VVIP
       if (bgVideo.currentTime >= 4 && videoOverlay) {
-        // Class ini akan menjalankan urutan di CSS: Kaca -> Garis Menyambung -> Foto -> Teks
         videoOverlay.classList.add("show-frame");
       }
-      
-      // 2. Detik 11: Menu Navigator Burgundy Muncul Otomatis
       if (bgVideo.currentTime >= 11 && !menuShown) {
         if (menu) menu.classList.add("show");
         menuShown = true;
       }
-      
-      // 3. Detik 13.9: Matikan video agar beku (freeze) menjadi background
       if (bgVideo.currentTime >= 13.9) {
         bgVideo.pause();
       }
@@ -1680,7 +1609,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // === GALERI ACARA & LIGHTBOX (CANGGIH) ===
+  // === GALERI ACARA & LIGHTBOX ===
   const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
   const galeriGridItems = document.querySelectorAll('.galeri-grid .galeri-item img');
   const lightbox = document.getElementById('lightbox');
@@ -1715,7 +1644,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === lightbox) lightbox.style.display = 'none';
   });
 
-  // === RSVP & UCAPAN GOOGLE SHEET (DENGAN PAGINASI) ===
+  // === RSVP & UCAPAN GOOGLE SHEET (DENGAN PAGINASI AMAN) ===
   const scriptURL = "https://script.google.com/macros/s/AKfycbzZidPPA1HdlAGW5LjV1-mfGYPPE22gzlFkD1jQxyQUT2OYPoOddNSwTaJ1ZzZzQA7_/exec";
   
   let allUcapan = [];
@@ -1752,7 +1681,6 @@ document.addEventListener("DOMContentLoaded", () => {
       await fetch(scriptURL, { method: "POST", body: formData });
       form.reset();
       
-      // Kembalikan tinggi textarea ke bentuk awal
       document.getElementById("ucapan").style.height = "48px";
       
       showNotif();
@@ -1765,7 +1693,7 @@ document.addEventListener("DOMContentLoaded", () => {
     list.innerHTML = "";
     
     if (allUcapan.length === 0) {
-      list.innerHTML = `<p style="opacity:0.8; text-align:center; color: #333;">Belum ada ucapan 😇</p>`;
+      list.innerHTML = `<p style="opacity:0.8; text-align:center; color: #fff;">Belum ada ucapan 😇</p>`;
       paginationContainer.innerHTML = "";
       return;
     }
@@ -1792,17 +1720,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (let i = 1; i <= totalPages; i++) {
       const btn = document.createElement("button");
-      btn.type = "button"; // FIX MUTLAK: Mencegah tombol paginasi bertindak sebagai tombol submit
+      btn.type = "button"; 
       btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
       btn.textContent = i;
       
       btn.addEventListener("click", function(e) {
-        e.preventDefault(); // Mencegah reload halaman
+        e.preventDefault(); 
         currentPage = i;
         renderUcapan();
         renderPagination();
         
-        // AUTO SCROLL FIX: Layar bergeser mulus dan mengunci di judul "Ucapan & Kehadiran"
         document.getElementById("ucapanList").scrollIntoView({ behavior: "smooth", block: "start" });
       });
       
@@ -1825,7 +1752,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Gunakan fungsi aman untuk setInterval agar tidak melempar event sebagai argument "forceFullReload"
   loadUcapan(true);
   setInterval(() => loadUcapan(false), 8000);
 
