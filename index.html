@@ -379,7 +379,7 @@
       width: 100%;
     }
 
-    /* MAPPING GAMBAR PARALLAX KOREKSI FINAL */
+    /* MAPPING GAMBAR PARALLAX KE SEKSI YANG BENAR */
     #invitation1.section-parallax::before { background-image: url('galeri8.webp'); }
     .acara.section-parallax::before { background-image: url('galeri8.webp'); } 
     #rsvp.section-parallax::before { background-image: url('galeri8.webp'); } 
@@ -430,15 +430,47 @@
       transform: translateZ(0);
     }
 
+    /* BINGKAI WRAPPER UNTUK BUNGA & FOTO */
+    .bingkai-wrapper {
+      position: relative;
+      display: inline-block;
+      margin: 0 auto 15px auto; /* Margin dipindah dari foto-mempelai-bingkai ke sini */
+    }
+
     .foto-mempelai-bingkai {
       width: 170px;
       height: 250px;
       object-fit: cover;
       border-radius: 100px; 
       border: 4px solid #354a5f; 
-      margin: 0 auto 15px auto;
       display: block;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      position: relative;
+      z-index: 2; /* Menempatkan foto di atas bunga */
+      margin: 0; 
+    }
+
+    /* CSS ORNAMEN BUNGA */
+    .bunga-hiasan {
+      position: absolute;
+      z-index: 1; /* Menempatkan bunga di belakang foto */
+      width: 55px; /* Dikecilkan dari 120px agar lebih proporsional */
+      pointer-events: none; /* Mencegah bunga menghalangi klik pada area tersebut */
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.25)); /* Memberi efek nyata/hidup */
+    }
+
+    /* Posisi Kiri: Agak ke atas dan miring rotasi ke luar */
+    .bunga-kiri {
+      top: -10px;
+      left: -50px;
+      transform: rotate(-35deg);
+    }
+
+    /* Posisi Kanan: Agak ke bawah dan miring rotasi ke luar (Asimetris / Tidak Sejajar) */
+    .bunga-kanan {
+      bottom: 10px;
+      right: -50px;
+      transform: rotate(45deg);
     }
 
     .nama-pengantin {
@@ -1008,15 +1040,9 @@
     
     .form-group { text-align: left; margin-bottom: 10px; width: 100%; }
     .form-group label { display: block; font-family: 'Poppins', sans-serif; font-size: 12px; margin-bottom: 4px; margin-left: 5px; color: #354a5f; font-weight: 600; }
-    .form-group input[type="text"], .form-group input[type="number"] { 
+    .form-group input { 
       width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid #354a5f; 
       font-family: 'Poppins', sans-serif; font-size: 13px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); background: #ffffff; color: #333; box-sizing: border-box; 
-    }
-    
-    /* INPUT FILE KHUSUS BUKTI TF */
-    .form-group input[type="file"] {
-      width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid #354a5f; 
-      font-family: 'Poppins', sans-serif; font-size: 12px; background: #ffffff; color: #333; box-sizing: border-box; cursor: pointer;
     }
     
     /* Tombol Konfirmasi Pendek, Kecil Sesuai Request */
@@ -1266,19 +1292,35 @@
 
   <div class="box-putih-kecil animasi-scroll">
     <div class="profilx">
+      
       <div class="pengantinx animasi-scroll">
-        <img src="foto-wanita.webp" class="foto-mempelai-bingkai" alt="Foto Sinta" loading="lazy" decoding="async">
+        <!-- BINGKAI WRAPPER SINTA -->
+        <div class="bingkai-wrapper">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kiri" alt="Bunga Kiri" loading="lazy">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kanan" alt="Bunga Kanan" loading="lazy">
+          <img src="foto-wanita.webp" class="foto-mempelai-bingkai" alt="Foto Sinta" loading="lazy" decoding="async">
+        </div>
+        
         <h2 class="nama-pengantin">SINTA WULAN DARI</h2>
         <p class="orang-tua">Putri dari<br>Bpk. Agus Triono & Ibu Titik Setia Rokhani</p>
         <p class="alamat0">Dsn. Bintang RT 1 / RW 1<br>Ds. Ngaringan, Kec. Gandusari</p>
       </div>
+
       <div class="and-symbol animasi-scroll">&</div>
+      
       <div class="pengantinx animasi-scroll">
-        <img src="foto-pria.webp" class="foto-mempelai-bingkai" alt="Foto Billy" loading="lazy" decoding="async">
+        <!-- BINGKAI WRAPPER BILLY -->
+        <div class="bingkai-wrapper">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kiri" alt="Bunga Kiri" loading="lazy">
+          <img src="bunga.webp" class="bunga-hiasan bunga-kanan" alt="Bunga Kanan" loading="lazy">
+          <img src="foto-pria.webp" class="foto-mempelai-bingkai" alt="Foto Billy" loading="lazy" decoding="async">
+        </div>
+
         <h2 class="nama-pengantin">BILLY FADE LEONA</h2>
         <p class="orang-tua">Putra dari<br>Bpk. Sutiman & Ibu Sutarti</p>
         <p class="alamat0">Dusun Tirtomoyo RT 2/RW 1<br>Desa Krisik, Kec. Gandusari</p>
       </div>
+
     </div>
   </div>
 
@@ -1456,10 +1498,6 @@
             <label>Ucapan :</label>
             <input type="text" id="tfUcapan" placeholder="Ucapan" required>
           </div>
-          <div class="form-group">
-            <label>Bukti Transfer (Opsional) :</label>
-            <input type="file" id="tfBukti" accept="image/*">
-          </div>
           <button type="submit" class="btn-konfirmasi">
             Konfirmasi
           </button>
@@ -1512,8 +1550,7 @@
     <div class="vintage-frame-container frame-penutup animasi-scroll" data-anim="zoom-up">
       <svg class="vf-svg-bg" viewBox="0 0 340 540" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M 170 10 C 220 10, 250 40, 290 40 A 15 15 0 0 1 305 55 L 305 65 A 15 15 0 0 0 320 80 L 320 460 A 15 15 0 0 0 305 475 L 305 485 A 15 15 0 0 1 290 500 C 250 500, 220 530, 170 530 C 120 530, 90 500, 50 500 A 15 15 0 0 1 35 485 L 35 475 A 15 15 0 0 0 20 460 L 20 80 A 15 15 0 0 0 35 65 L 35 55 A 15 15 0 0 1 50 40 C 90 40, 120 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
-        <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 478 A 12 12 0 0 0 290 490 L 290 498 A 12 12 0 0 1 278 510 L 170 510" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
-        <path class="anim-line" d="M 170 22 C 125 22, 98 50, 62 50 A 12 12 0 0 0 50 62 L 50 70 A 12 12 0 0 1 38 82 L 38 478 A 12 12 0 0 1 50 490 L 50 498 A 12 12 0 0 0 62 510 L 170 510" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
+        <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 458 A 12 12 0 0 0 290 470 L 290 478 A 12 12 0 0 1 278 490 C 242 490, 215 518, 170 518 C 125 518, 98 490, 62 490 A 12 12 0 0 1 50 478 L 50 470 A 12 12 0 0 0 38 458 L 38 82 A 12 12 0 0 0 50 70 L 50 62 A 12 12 0 0 1 62 50 C 98 50, 125 22, 170 22 Z" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
       </svg>
       <div class="vf-content">
         <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan ikon-gunungan-penutup" loading="lazy" style="margin-bottom: 12px; margin-top: 0;">
@@ -1539,9 +1576,6 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // SCRIPT GOOGLE SHEET (Dipindah ke paling atas agar bisa diakses oleh RSVP & Upload Bukti)
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzZidPPA1HdlAGW5LjV1-mfGYPPE22gzlFkD1jQxyQUT2OYPoOddNSwTaJ1ZzZzQA7_/exec";
-
   // === ANIMASI SCROLL ===
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1549,19 +1583,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
-
-  // === OBSERVER KHUSUS GALERI (ANTI LAG & AUTO PAUSE) ===
-  const galeriSection = document.getElementById('galeri-section');
-  const galeriObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-      } else {
-        entry.target.classList.remove('is-visible');
-      }
-    });
-  }, { threshold: 0.1 });
-  if (galeriSection) galeriObserver.observe(galeriSection);
 
   // === TOMBOL SALIN REKENING ===
   document.addEventListener("click", function (e) {
@@ -1588,82 +1609,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === KONFIRMASI GIFT KE WHATSAPP & UPLOAD BUKTI TF ===
+  // === KONFIRMASI GIFT KE WHATSAPP ===
   const giftConfirmForm = document.getElementById("giftConfirmForm");
   if (giftConfirmForm) {
-    giftConfirmForm.addEventListener("submit", async function(e) {
+    giftConfirmForm.addEventListener("submit", function(e) {
       e.preventDefault();
       
       const nama = document.getElementById("tfNama").value;
       const nominal = document.getElementById("tfNominal").value;
       const ucapan = document.getElementById("tfUcapan").value;
       
-      // Mengambil data file gambar
-      const fileInput = document.getElementById("tfBukti");
-      const file = fileInput.files[0];
-      const submitBtn = giftConfirmForm.querySelector('button[type="submit"]');
-      
+      // Nomor WA Tujuan Update
       const phone = "6285706889273";
       
-      // Fungsi untuk merakit teks dan melempar ke WhatsApp
-      const sendWA = (buktiUrl = "") => {
-        let message = `*Konfirmasi Gift Wedding*\n\n`;
-        message += `Nama : ${nama}\n`;
-        message += `Nominal : Rp ${nominal}\n`;
-        message += `Ucapan : ${ucapan}\n`;
-        if (buktiUrl) {
-          message += `Bukti TF : ${buktiUrl}\n\n`;
-        } else {
-          message += `Bukti TF : (Tidak dilampirkan dari web)\n_Mohon lampirkan foto/screenshot bukti transfer pada obrolan ini._\n\n`;
-        }
-        message += `Happy Wedding!`;
-        
-        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        window.open(waUrl, '_blank');
-        
-        giftConfirmForm.reset();
-        submitBtn.innerHTML = "Konfirmasi";
-        submitBtn.disabled = false;
-      };
-
-      // Jika tamu memasukkan Foto, upload dulu ke Google Drive
-      if (file) {
-        submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Mengunggah...'; // Animasi loading
-        submitBtn.disabled = true; // Kunci tombol biar gak di-klik 2x
-        
-        const reader = new FileReader();
-        reader.onload = async function() {
-          const base64Data = reader.result.split(',')[1];
-          
-          const formData = new URLSearchParams();
-          formData.append('action', 'uploadBukti');
-          formData.append('fileName', file.name);
-          formData.append('mimeType', file.type);
-          formData.append('fileData', base64Data);
-          
-          try {
-            const response = await fetch(scriptURL, {
-              method: 'POST',
-              body: formData
-            });
-            const result = await response.json();
-            if (result.result === 'success') {
-              sendWA(result.url); // Berhasil, kirim link ke WA
-            } else {
-              alert("Gagal mengunggah bukti ke server. Anda akan diarahkan ke WhatsApp.");
-              sendWA(); 
-            }
-          } catch (error) {
-            console.error("Error upload:", error);
-            alert("Koneksi bermasalah. Anda akan diarahkan ke WhatsApp.");
-            sendWA();
-          }
-        };
-        reader.readAsDataURL(file); // Merubah foto jadi kode rahasia Base64
-      } else {
-        // Jika tamu tidak memasukkan foto, langsung buka WA
-        sendWA();
-      }
+      let message = `Halo, saya telah mengirimkan kado pernikahan (Gift) dengan rincian:\n\n`;
+      message += `*Nama:* ${nama}\n`;
+      message += `*Nominal:* Rp ${nominal}\n`;
+      message += `*Ucapan:* ${ucapan}\n\n`;
+      message += `_Mohon lampirkan foto/screenshot bukti transfer yang telah Anda pilih pada obrolan ini. Terima kasih!_`;
+      
+      const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(waUrl, '_blank');
+      
+      giftConfirmForm.reset();
     });
   }
 
@@ -1836,6 +1804,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // === RSVP & UCAPAN GOOGLE SHEET (DENGAN PAGINASI AMAN) ===
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzZidPPA1HdlAGW5LjV1-mfGYPPE22gzlFkD1jQxyQUT2OYPoOddNSwTaJ1ZzZzQA7_/exec";
+  
   let allUcapan = [];
   let currentPage = 1;
   const itemsPerPage = 5; 
@@ -1951,4 +1921,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-
