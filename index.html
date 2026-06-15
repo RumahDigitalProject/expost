@@ -693,7 +693,7 @@
     .tombol-maps a:hover { background-color: #f3a302; color: #3a0606; }
 
     /* =========================================
-       GALERI SECTION & ANIMASI GARIS BURGUNDY VVIP
+       GALERI SECTION & ANIMASI GARIS BURGUNDY GRUP VVIP
        ========================================= */
     .galeri-section {
       padding: 60px 20px;
@@ -765,15 +765,15 @@
       margin: 0 auto;
     }
 
-    /* ANIMASI GARIS TEPI BURGUNDY BERJEDA 10 DETIK & ANTI LAG */
+    /* ANIMASI GARIS TEPI BURGUNDY DENGAN SISTEM GRUP (ANTI-LAG) */
     .galeri-item {
       background: white;
-      padding: 12px; /* Memberikan jarak (bingkai putih) antara foto dan garis burgundy */
+      padding: 8px; /* Memberikan jarak/bingkai putih sebelum garis tepi foto */
       border-radius: 20px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       position: relative;
       overflow: hidden;
-      transform: translateZ(0);
+      transform: translateZ(0); /* Anti lag / Hardware Acceleration */
     }
     
     .galeri-item::before {
@@ -781,8 +781,7 @@
       position: absolute;
       width: 200%; height: 200%;
       top: -50%; left: -50%;
-      background: conic-gradient(from 0deg, transparent 75%, #580b0b 100%);
-      will-change: transform, opacity;
+      background: conic-gradient(from 0deg, transparent 75%, #580b0b 100%); /* Cahaya Burgundy */
       display: none; 
       z-index: 1;
     }
@@ -804,42 +803,57 @@
     }
     .galeri-item img:hover { transform: scale(1.03); }
 
-    /* HANYA MUNCUL JIKA LAYAR SEDANG DI GALERI (Intersection Observer) */
-    .galeri-section.is-visible .galeri-item:nth-child(odd)::before { 
-      display: block; 
-      /* Total 13s. Gerak 3 detik, Jeda/Hilang 10 Detik. Searah Jarum Jam */
-      animation: spin-garis 13s linear infinite; 
-    }
-    .galeri-section.is-visible .galeri-item:nth-child(even)::before { 
-      display: block; 
-      /* Berlawanan Arah Jarum Jam */
-      animation: spin-garis-reverse 13s linear infinite; 
-    }
-
-    /* Animasi dengan jeda (Opacity 0 = hilang istirahat) */
-    @keyframes spin-garis {
+    /* SISTEM ANIMASI KELOMPOK/GRUP 
+      Total Siklus: 9 Detik
+      Masing-masing grup menyala 3 detik, lalu mati (opacity 0) selama 6 detik.
+    */
+    @keyframes spin-grup1 {
       0% { transform: rotate(0deg); opacity: 1; }
-      25% { transform: rotate(360deg); opacity: 1; } /* Selesai berputar dalam 25% waktu */
-      25.01% { opacity: 0; } /* Langsung hilang */
-      100% { transform: rotate(360deg); opacity: 0; } /* Menunggu sampai 100% */
+      33.33% { transform: rotate(360deg); opacity: 1; }
+      33.34% { opacity: 0; }
+      100% { transform: rotate(360deg); opacity: 0; }
+    }
+    
+    @keyframes spin-grup2 {
+      0% { transform: rotate(0deg); opacity: 0; }
+      33.33% { opacity: 0; }
+      33.34% { transform: rotate(0deg); opacity: 1; }
+      66.66% { transform: rotate(-360deg); opacity: 1; } /* Bergerak berlawanan arah */
+      66.67% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    
+    @keyframes spin-grup3 {
+      0% { transform: rotate(0deg); opacity: 0; }
+      66.66% { opacity: 0; }
+      66.67% { transform: rotate(0deg); opacity: 1; }
+      100% { transform: rotate(360deg); opacity: 1; }
     }
 
-    @keyframes spin-garis-reverse {
-      0% { transform: rotate(360deg); opacity: 1; }
-      25% { transform: rotate(0deg); opacity: 1; }
-      25.01% { opacity: 0; }
-      100% { transform: rotate(0deg); opacity: 0; }
+    /* Trigger: Animasi hanya menyala saat user menatap layar (Class is-visible aktif) */
+    
+    /* GRUP 1 (Galeri 1, 3, 6) - Nyala Pertama */
+    .galeri-section.is-visible .galeri-item:nth-child(1)::before,
+    .galeri-section.is-visible .galeri-item:nth-child(3)::before,
+    .galeri-section.is-visible .galeri-item:nth-child(6)::before {
+      display: block;
+      animation: spin-grup1 9s linear infinite;
     }
 
-    /* Delay bergantian agar tidak muncul bersamaan */
-    .galeri-item:nth-child(1)::before { animation-delay: 0s; }
-    .galeri-item:nth-child(2)::before { animation-delay: 1.5s; }
-    .galeri-item:nth-child(3)::before { animation-delay: 3s; }
-    .galeri-item:nth-child(4)::before { animation-delay: 4.5s; }
-    .galeri-item:nth-child(5)::before { animation-delay: 6s; }
-    .galeri-item:nth-child(6)::before { animation-delay: 7.5s; }
-    .galeri-item:nth-child(7)::before { animation-delay: 9s; }
-    .galeri-item:nth-child(8)::before { animation-delay: 10.5s; }
+    /* GRUP 2 (Galeri 2, 4, 7) - Nyala Kedua */
+    .galeri-section.is-visible .galeri-item:nth-child(2)::before,
+    .galeri-section.is-visible .galeri-item:nth-child(4)::before,
+    .galeri-section.is-visible .galeri-item:nth-child(7)::before {
+      display: block;
+      animation: spin-grup2 9s linear infinite;
+    }
+
+    /* GRUP 3 (Galeri 5, 8) - Nyala Ketiga */
+    .galeri-section.is-visible .galeri-item:nth-child(5)::before,
+    .galeri-section.is-visible .galeri-item:nth-child(8)::before {
+      display: block;
+      animation: spin-grup3 9s linear infinite;
+    }
 
     .galeri-item.large { grid-column: span 2; aspect-ratio: 16 / 9; }
     .galeri-item.small { grid-column: span 1; aspect-ratio: 1 / 1; }
@@ -885,7 +899,7 @@
     .next { right: 15px; }
 
     /* =========================================
-       GIFT SECTION (WEDDING GIFT - KAPSUL VVIP)
+       GIFT SECTION (WEDDING GIFT - KAPSUL)
        ========================================= */
     #gift {
       position: relative;
@@ -1009,13 +1023,13 @@
     .RSVP-title {
       font-family: 'Great Vibes', cursive; font-size: 38px; color: #354a5f; 
       margin-bottom: 30px;
-      text-align: center;
+      text-align: center; /* Rata Tengah */
       width: 100%;
       display: block;
     }
     .rsvp-container {
-      background: rgba(255, 255, 255, 0.65); 
-      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); 
+      background: rgba(255, 255, 255, 0.65); /* Cerah Transparan */
+      backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); /* Blur tipis 5px */
       border: 1px solid rgba(255, 255, 255, 0.8);
       padding: 30px; border-radius: 20px; max-width: 600px; margin: 0 auto; width: 100%;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -1032,10 +1046,12 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    /* UKURAN KOTAK UCAPAN DIBUAT KECIL (1 BARIS) NAMUN AUTO-EXPAND */
     #rsvp textarea { 
-      resize: none; /* Cegah ditarik meluber */
+      height: 48px; /* Sama tinggi dengan kotak input nama */
+      min-height: 48px;
+      resize: none; /* Cegah ditarik manual agar rapi */
       overflow: hidden; /* Sembunyikan scrollbar agar auto-expand bekerja mulus */
-      min-height: 48px; /* Ukuran default kecil 1 baris */
     } 
 
     #rsvp input, #rsvp textarea, #rsvp select { background: rgba(255,255,255,0.9); color: #333; }
@@ -1052,7 +1068,7 @@
     }
     .ucapan-item small { opacity: 0.8; font-size: 13px; color: #5a6e82; }
 
-    /* CSS PAGINASI UCAPAN (Bug Button Type Telah Diperbaiki Mutlak) */
+    /* CSS PAGINASI UCAPAN (Bug Auto-Refresh Diperbaiki) */
     .pagination-container {
       display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap;
     }
@@ -1378,6 +1394,7 @@
 
       <div class="gift-confirm-box">
         <img src="ornamen.png" alt="Ornamen" class="gift-ornament" loading="lazy" onerror="this.style.display='none'">
+        
         <h3 class="gift-confirm-title">
           <span style="font-family: 'Great Vibes', cursive; font-size: 38px;">Gift</span> Confirm
         </h3>
@@ -1396,7 +1413,9 @@
             <label>Ucapan :</label>
             <input type="text" id="tfUcapan" placeholder="Ucapan" required>
           </div>
-          <button type="submit" class="btn-konfirmasi">Konfirmasi</button>
+          <button type="submit" class="btn-konfirmasi">
+            Konfirmasi
+          </button>
         </form>
       </div>
 
@@ -1408,7 +1427,7 @@
     <h2 class="RSVP-title animasi-scroll"> Rsvp & Ucapan</h2>
     <form id="rsvpForm">
       <input type="text" id="nama" placeholder="Nama Anda" required>
-      <textarea id="ucapan" rows="1" placeholder="Tulis ucapan Anda..." required oninput="this.style.height='';this.style.height=this.scrollHeight+'px'"></textarea>
+      <textarea id="ucapan" placeholder="Tulis ucapan Anda..." required oninput="this.style.height='48px';this.style.height=this.scrollHeight+'px'"></textarea>
       <select id="kehadiran" required>
         <option value="">Konfirmasi Kehadiran</option>
         <option value="Hadir">Hadir</option>
@@ -1605,6 +1624,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bgVideo.addEventListener("timeupdate", () => {
       // 1. Detik 4: Memicu Seluruh Rantai Animasi Bingkai VVIP
       if (bgVideo.currentTime >= 4 && videoOverlay) {
+        // Class ini akan menjalankan urutan di CSS: Kaca -> Garis Menyambung -> Foto -> Teks
         videoOverlay.classList.add("show-frame");
       }
       
@@ -1748,7 +1768,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
       
       // Kembalikan tinggi textarea ke bentuk awal
-      document.getElementById("ucapan").style.height = "";
+      document.getElementById("ucapan").style.height = "48px";
       
       showNotif();
       currentPage = 1; 
