@@ -941,9 +941,10 @@
       z-index: 2;
     }
 
-    /* KAPSUL BINGKAI RAKSASA WEDDING GIFT - BACKGROUND LANGSUNG TANPA LAYER (ANTI LAG MUTLAK) */
+    /* KAPSUL BINGKAI RAKSASA WEDDING GIFT - BACKGROUND LANGSUNG + OVERLAY PUTIH TIPIS (ANTI LAG) */
     .box-gift-pill {
-      background: url('galeri8.webp') center center / cover no-repeat; /* BACKGROUND LANGSUNG DISINI */
+      /* Gunakan linear-gradient untuk membuat overlay putih tanpa perlu menambah layer ::before/::after, sangat ringan untuk HP */
+      background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url('galeri8.webp') center center / cover no-repeat;
       border: 3px solid #354a5f; 
       outline: 2px solid #354a5f; /* Garis luar */
       outline-offset: 8px; /* Jarak garis luar */
