@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buat Link Undangan - Sinta & Billy 💌</title>
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #7b1f26, #f3a302);
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .generator {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      max-width: 420px;
+      width: 100%;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: 34px;
+      margin-bottom: 20px;
+      color: #fffbea;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      background-color: #f3a302;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #d48c00;
+    }
+
+    .hasil {
+      margin-top: 20px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      word-break: break-all;
+    }
+
+    a.link {
+      color: #fff;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    .btn-wa {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+
+    .btn-wa:hover {
+      background-color: #1ea955;
+    }
+  </style>
+</head>
+<body>
+  <div class="generator">
+    <h1>Buat Link Undangan 💌</h1>
+    <p>Masukkan nama tamu undangan di bawah ini:</p>
+
+    <input type="text" id="namaTamu" placeholder="Contoh: Bapak Andi & Keluarga" />
+    <button id="buatLink">Buat Link</button>
+
+    <div class="hasil" id="hasil" style="display:none;">
+      <p>Link undangan siap dikirim:</p>
+      <a id="linkUndangan" class="link" href="#" target="_blank"></a>
+      <br />
+      <a id="btnKirimWa" class="btn-wa" href="#" target="_blank">
+        📩 Kirim via WhatsApp
+      </a>
+    </div>
+  </div>
+
+<script>
+  // 🏠 URL undangan utama (Disamakan dengan project Sinta & Billy)
+  const baseUrl = "https://rumahdigitalproject.github.io/Sinta-Billy/";
+
+  document.getElementById("buatLink").addEventListener("click", () => {
+    const nama = document.getElementById("namaTamu").value.trim();
+    if (!nama) {
+      alert("Masukkan nama tamu dulu Bro😅!");
+      return;
+    }
+
+    // buat link undangan (sudah di-encode untuk parameter)
+    const encodedName = encodeURIComponent(nama);
+    const link = `${baseUrl}?to=${encodedName}`;
+
+    // tampilkan link hasil
+    const hasilDiv = document.getElementById("hasil");
+    const linkEl = document.getElementById("linkUndangan");
+    const btnWa = document.getElementById("btnKirimWa");
+
+    hasilDiv.style.display = "block";
+    linkEl.href = link;
+    linkEl.textContent = link;
+
+    // --- Buat pesan WA yang rapi dan disesuaikan dengan agama Hindu (seperti di undangan utama) ---
+    const plainPesan = `Om Swastyastu,\n\n` +
+      `Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa, dengan memohon doa restu dan tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i *${nama}* ` +
+      `untuk hadir dalam acara pernikahan kami:\n\n` +
+      ` *Sinta & Billy* \n\n` +
+      `yang diselenggarakan pada tanggal *18 - 19 Juli 2026* \n\n` +
+      `Untuk detail acara, silakan klik tautan berikut:\n${link}\n\n` +
+      `E-invitation ini merupakan undangan resmi dari kami karena keterbatasan jarak dan waktu.\n\n` +
+      `Merupakan suatu kebahagiaan dan kehormatan bagi kami jika Bapak/Ibu/Saudara/i berkenan menghadiri acara resepsi pernikahan kami. Terima kasih banyak atas perhatiannya.\n\n` +
+      `Om Santih, Santih, Santih, Om`;
+
+    // encode seluruh pesan agar aman dimasukkan ke query string
+    const waUrl = `https://wa.me/?text=${encodeURIComponent(plainPesan)}`;
+
+    // set tombol WA
+    btnWa.href = waUrl;
+    btnWa.setAttribute('rel', 'noopener noreferrer'); // keamanan
+    btnWa.setAttribute('target', '_blank');
+  });
+</script>
+</body>
+</html>
+
