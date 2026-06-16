@@ -1242,7 +1242,7 @@
 </div>
 
 <div class="slideshow" id="slideshow-section">
-<video id="bgVideo" playsinline muted preload="metadata" class="background-video">
+<video id="bgVideo" playsinline webkit-playsinline muted="muted" preload="auto" class="background-video">
   <source src="video.mp4" type="video/mp4">
 </video>
 
@@ -1656,7 +1656,20 @@ document.addEventListener("DOMContentLoaded", () => {
       
       cover.classList.add("cover-slide-up");
       
-      if (bgVideo) bgVideo.play();
+            if (bgVideo) {
+        bgVideo.muted = true; // Paksa bisu dari sistem agar Edge percaya
+        bgVideo.currentTime = 0; // Pastikan video mulai dari detik 0
+        let paksaPlay = bgVideo.play();
+        
+        if (paksaPlay !== undefined) {
+          paksaPlay.catch(error => {
+            console.warn("Edge menahan video, memaksa muat ulang...", error);
+            bgVideo.load(); // Pancing ulang mesin videonya
+            bgVideo.play(); // Tembak play sekali lagi
+          });
+        }
+      }
+
       
       isOpened = true;
       safePlay(); 
@@ -1949,4 +1962,5 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
