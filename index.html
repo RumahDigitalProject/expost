@@ -690,10 +690,10 @@
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(243, 163, 2, 0.5); 
-      border-radius: 180px; 
+      border-radius: 999px;
       max-width: 380px;
       width: 100%;
-      padding: 60px 24px; 
+      padding: 60px 24px; /* Padding lega atas bawah agar tidak terpotong */
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       text-align: center;
       color: #ffffff;
@@ -781,10 +781,9 @@
       position: relative; 
     }
 
-    /* ORNAMEN WAYANG (UKURAN 200PX FORMASI 3-2) */
     .hiasan-wayang {
       position: absolute;
-      z-index: 1; /* Di bawah foto galeri */
+      z-index: 1; 
       width: 200px; 
       opacity: 0.6; 
       pointer-events: none;
@@ -797,7 +796,6 @@
     .wayang-kanan-1 { top: 20%; right: -50px; transform: scaleX(-1) rotate(15deg); }
     .wayang-kanan-2 { bottom: 20%; right: -50px; transform: scaleX(-1) rotate(15deg); }
 
-    /* Teks Galeri Burgundy Center */
     .galeri-title {
       font-family: 'Great Vibes', cursive;
       font-size: 50px;
@@ -859,10 +857,9 @@
       z-index: 2; 
     }
 
-    /* ITEM GALERI BERSIH & SANGAT RINGAN TANPA ANIMASI */
     .galeri-item {
       background: white;
-      padding: 8px; /* Bingkai putih elegan */
+      padding: 8px; 
       border-radius: 20px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       position: relative;
@@ -932,7 +929,7 @@
       color: #354a5f;
       background-image: url('dasar.webp');
       background-size: contain;
-      background-color: #ffffff; /* Latar Belakang Luar Tetap Putih/Dasar Sesuai Instruksi */
+      background-color: #ffffff; 
       min-height: auto;
       display: block; 
       z-index: 0;
@@ -954,33 +951,31 @@
       font-size: 42px;
       color: #354a5f;
       margin-bottom: 30px;
-      text-align: center; /* Rata Tengah Mutlak */
+      text-align: center;
       position: relative;
       z-index: 2;
     }
 
-    /* TEKS DOA RATA TENGAH & JARAK DILEBARKAN */
     .gift-thanks {
       font-family: 'Poppins', sans-serif;
       font-size: 15px;
       opacity: 0.9;
-      margin-bottom: 55px; /* Jarak dibuat lebih lega dengan bingkai bawah */
+      margin-bottom: 55px;
       font-style: italic;
       max-width: 600px;
       margin-left: auto; margin-right: auto;
-      text-align: center; /* Rata Tengah Mutlak */
+      text-align: center;
       position: relative;
       z-index: 2;
     }
 
-    /* KAPSUL BINGKAI RAKSASA WEDDING GIFT - BACKGROUND LANGSUNG + OVERLAY PUTIH TIPIS (ANTI LAG) */
+    /* KAPSUL BINGKAI RAKSASA */
     .box-gift-pill {
-      /* Gunakan linear-gradient untuk membuat overlay putih tanpa perlu menambah layer ::before/::after, sangat ringan untuk HP */
-      background: linear-gradient(rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.65)), url('galeri8.webp') center center / cover no-repeat;
+      background: rgba(255, 255, 255, 0.85); 
       border: 3px solid #354a5f; 
-      outline: 2px solid #354a5f; /* Garis luar */
-      outline-offset: 8px; /* Jarak garis luar */
-      border-radius: 180px; /* Bentuk kapsul memanjang */
+      outline: 2px solid #354a5f; 
+      outline-offset: 8px; 
+      border-radius: 180px; 
       max-width: 360px;
       width: 90vw;
       padding: 80px 20px 60px; 
@@ -990,21 +985,8 @@
       flex-direction: column;
       align-items: center;
       position: relative;
-      overflow: hidden; 
-      z-index: 1;
-      
-      /* PENAMBAHAN HARDWARE ACCELERATION UNTUK MENGHILANGKAN LAG */
-      -webkit-backface-visibility: hidden;
-      transform: translateZ(0);
-      will-change: transform;
     }
 
-    .box-gift-pill > * {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* KARTU ATM (DIPERKECIL AGAR MASUK KAPSUL SECARA HARMONIS) */
     .atm-card {
       width: 100%; max-width: 250px; height: 145px; margin: 0 auto 20px;
       border-radius: 12px; padding: 12px; position: relative; color: #fff;
@@ -1028,7 +1010,6 @@
       border: none; color: #1c1400; font-weight: bold;
     }
 
-    /* FORM KONFIRMASI MENYATU (TANPA BINGKAI KOTAK LAMA) */
     .gift-confirm-box {
       width: 100%;
       text-align: center;
@@ -1040,7 +1021,6 @@
     
     .form-group { text-align: left; margin-bottom: 10px; width: 100%; }
     .form-group label { display: block; font-family: 'Poppins', sans-serif; font-size: 12px; margin-bottom: 4px; margin-left: 5px; color: #354a5f; font-weight: 600; }
-    
     .form-group input[type="text"], .form-group input[type="number"] { 
       width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid #354a5f; 
       font-family: 'Poppins', sans-serif; font-size: 13px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); background: #ffffff; color: #333; box-sizing: border-box; 
@@ -1051,7 +1031,6 @@
       font-family: 'Poppins', sans-serif; font-size: 12px; background: #ffffff; color: #333; box-sizing: border-box; cursor: pointer;
     }
     
-    /* Tombol Konfirmasi Pendek, Kecil Sesuai Request */
     .btn-konfirmasi {
       width: auto; padding: 8px 30px; background: #354a5f; color: #fff; 
       border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
@@ -1061,7 +1040,7 @@
     .btn-konfirmasi:disabled { background: #5a6e82; cursor: not-allowed; transform: none; }
 
     /* =========================================
-       RSVP (KACA GELAP LUXURY & TEKS EMAS CERAH SEPERTI DI RESEPSI)
+       RSVP (KACA GELAP LUXURY)
        ========================================= */
     #rsvp {
       display: flex;
@@ -1069,7 +1048,6 @@
       position: relative; z-index: 1;
     }
     
-    /* Judul RSVP Selaras Dengan Resepsi Emas Cerah */
     .RSVP-title {
       font-family: 'Great Vibes', cursive; 
       font-size: 38px; 
@@ -1081,7 +1059,6 @@
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
-    /* Ganti Warna Background, Blur & Border Sesuai Box Acara Mewah */
     .rsvp-container {
       background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); 
@@ -1092,17 +1069,15 @@
       -webkit-backface-visibility: hidden; transform: translateZ(0);
     }
     
-    /* Pengunci Lebar Input RSVP Anti Meluber */
     #rsvp input, #rsvp select, #rsvp textarea, #rsvp button {
       width: 100%; 
       max-width: 100%; 
-      box-sizing: border-box; /* Kunci Padding masuk ukuran asli */
+      box-sizing: border-box; 
       padding: 12px; margin-top: 10px; border: 1px solid rgba(243,163,2,0.3);
       border-radius: 10px; font-size: 16px;
       font-family: 'Poppins', sans-serif;
     }
 
-    /* UKURAN KOTAK UCAPAN DIBUAT KECIL (1 BARIS) NAMUN AUTO-EXPAND */
     #rsvp textarea { 
       height: 48px; 
       min-height: 48px;
@@ -1112,7 +1087,6 @@
 
     #rsvp input, #rsvp textarea, #rsvp select { background: rgba(255,255,255,0.9); color: #333; }
     
-    /* Tombol warna emas/biru relevan biar megah */
     #rsvp button {
       background: rgba(243, 163, 2, 0.85); color: #ffffff; font-weight: 600; cursor: pointer; transition: 0.3s; border: none;
     }
@@ -1127,7 +1101,6 @@
     }
     .ucapan-item small { opacity: 0.8; font-size: 13px; color: #5a6e82; }
 
-    /* CSS PAGINASI UCAPAN (Bug Auto-Refresh Diperbaiki Mutlak) */
     .pagination-container {
       display: flex; justify-content: center; gap: 8px; margin-top: 20px; flex-wrap: wrap;
     }
@@ -1144,7 +1117,6 @@
       to {opacity: 1; transform: translateY(0);}
     }
 
-    /* Notifikasi */
     #notif {
       position: fixed; top: 20px; right: 20px; background: #354a5f; color: #ffffff;
       padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -1158,7 +1130,6 @@
       color: #f7e9e9; text-align: center; padding: 80px 20px 100px; font-family: "Poppins", sans-serif;
     }
     
-    /* BRAND BAWAH DIUBAH HITAM PEKAT */
     .footer-brand {
       font-size: 20px; 
       font-weight: 600; 
@@ -1213,13 +1184,12 @@
       pointer-events: auto !important;
       width: 90vw !important; 
       max-width: 340px !important; 
-      aspect-ratio: 340 / 540 !important;
       position: relative !important;
       filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.3)) !important;
     }
     
     .frame-penutup .vf-content {
-      padding: 40px 35px !important; 
+      padding: 60px 35px !important; /* Padding lega atas-bawah */
       position: absolute !important; top:0; left:0; width: 100%; height: 100%;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
@@ -1234,7 +1204,6 @@
       font-weight: 500;
     }
     
-    /* RESET SEKSI UCAPAN BIAR TIDAK MENJEPIT BINGKAI */
     #ucapan {
       padding: 60px 0 !important; 
       width: 100vw !important;
@@ -1407,14 +1376,6 @@
       <img src="galeri6.webp" class="lightbox-trigger" alt="Galeri 6" decoding="async">
       <img src="galeri7.webp" class="lightbox-trigger" alt="Galeri 7" decoding="async">
       <img src="galeri8.webp" class="lightbox-trigger" alt="Galeri 8" decoding="async">
-      <img src="galeri1.webp" class="lightbox-trigger" alt="Galeri 1" decoding="async">
-      <img src="galeri2.webp" class="lightbox-trigger" alt="Galeri 2" decoding="async">
-      <img src="galeri3.webp" class="lightbox-trigger" alt="Galeri 3" decoding="async">
-      <img src="galeri4.webp" class="lightbox-trigger" alt="Galeri 4" decoding="async">
-      <img src="galeri5.webp" class="lightbox-trigger" alt="Galeri 5" decoding="async">
-      <img src="galeri6.webp" class="lightbox-trigger" alt="Galeri 6" decoding="async">
-      <img src="galeri7.webp" class="lightbox-trigger" alt="Galeri 7" decoding="async">
-      <img src="galeri8.webp" class="lightbox-trigger" alt="Galeri 8" decoding="async">
     </div>
   </div>
 
@@ -1463,17 +1424,8 @@
   </div>
 
   <div class="box-gift-pill animasi-scroll" data-anim="up">
-      
       <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan animasi-scroll" data-anim="zoom-up" loading="lazy" style="margin-bottom: 25px;">
       
-      <div class="atm-card" data-rek="1122 3344 5566" style="display: none !important;">
-        <div class="bank-logo"><img src="bank.webp" alt="SeaBank Logo" loading="lazy" decoding="async"></div>
-        <div class="atm-chip"></div>
-        <div class="rek-number">1122 3344 5566</div>
-        <div class="rek-name">Nadia Shafira</div>
-        <button class="copy-btn"><i class="fa-regular fa-copy"></i> <span>Salin</span></button>
-      </div>
-
       <div class="atm-card" data-rek="000901148352509">
         <div class="bank-logo"><img src="bank.webp" alt="Bank Logo" loading="lazy" decoding="async"></div>
         <div class="atm-chip"></div>
@@ -1483,8 +1435,6 @@
       </div>
 
       <div class="gift-confirm-box">
-        <img src="ornamen.png" alt="Ornamen" class="gift-ornament" loading="lazy" onerror="this.style.display='none'">
-        
         <h3 class="gift-confirm-title">
           <span style="font-family: 'Great Vibes', cursive; font-size: 38px;">Gift</span> Confirm
         </h3>
@@ -1503,16 +1453,9 @@
             <label>Ucapan :</label>
             <input type="text" id="tfUcapan" placeholder="Ucapan" required>
           </div>
-          <div class="form-group">
-            <label>Bukti Transfer (Opsional) :</label>
-            <input type="file" id="tfBukti" accept="image/*">
-          </div>
-          <button type="submit" class="btn-konfirmasi">
-            Konfirmasi
-          </button>
+          <button type="submit" class="btn-konfirmasi">Konfirmasi</button>
         </form>
       </div>
-
   </div>
 </section>
 
@@ -1555,12 +1498,10 @@
 
 <div class="ucapan-footer-bg section-parallax">
   <section id="ucapan">
-    
     <div class="vintage-frame-container frame-penutup animasi-scroll" data-anim="zoom-up">
       <svg class="vf-svg-bg" viewBox="0 0 340 540" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M 170 10 C 220 10, 250 40, 290 40 A 15 15 0 0 1 305 55 L 305 65 A 15 15 0 0 0 320 80 L 320 460 A 15 15 0 0 0 305 475 L 305 485 A 15 15 0 0 1 290 500 C 250 500, 220 530, 170 530 C 120 530, 90 500, 50 500 A 15 15 0 0 1 35 485 L 35 475 A 15 15 0 0 0 20 460 L 20 80 A 15 15 0 0 0 35 65 L 35 55 A 15 15 0 0 1 50 40 C 90 40, 120 10, 170 10 Z" fill="rgba(255,255,255,0.75)" stroke="#6c7f93" stroke-width="2.5"/>
-        <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 478 A 12 12 0 0 0 290 490 L 290 498 A 12 12 0 0 1 278 510 L 170 510" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
-        <path class="anim-line" d="M 170 22 C 125 22, 98 50, 62 50 A 12 12 0 0 0 50 62 L 50 70 A 12 12 0 0 1 38 82 L 38 478 A 12 12 0 0 1 50 490 L 50 498 A 12 12 0 0 0 62 510 L 170 510" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
+        <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 458 A 12 12 0 0 0 290 470 L 290 478 A 12 12 0 0 1 278 490 C 242 490, 215 518, 170 518 C 125 518, 98 490, 62 490 A 12 12 0 0 1 50 478 L 50 470 A 12 12 0 0 0 38 458 L 38 82 A 12 12 0 0 0 50 70 L 50 62 A 12 12 0 0 1 62 50 C 98 50, 125 22, 170 22 Z" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
       </svg>
       <div class="vf-content">
         <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan ikon-gunungan-penutup" loading="lazy" style="margin-bottom: 12px; margin-top: 0;">
@@ -1586,401 +1527,11 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // === SCRIPT GOOGLE SHEET & KODE KLIEN ===
   const scriptURL = "https://script.google.com/macros/s/AKfycbzZidPPA1HdlAGW5LjV1-mfGYPPE22gzlFkD1jQxyQUT2OYPoOddNSwTaJ1ZzZzQA7_/exec";
-  const KODE_KLIEN = "SINTA_BILLY";
-
-  // === ANIMASI SCROLL ===
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      entry.target.classList.toggle('muncul', entry.isIntersecting);
-    });
+    entries.forEach(entry => entry.target.classList.toggle('muncul', entry.isIntersecting));
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
-
-  // === TOMBOL SALIN REKENING ===
-  document.addEventListener("click", function (e) {
-    const btn = e.target.closest(".copy-btn");
-    if (!btn) return;
-    const card = btn.closest(".atm-card");
-    const nomor = card.dataset.rek;
-    salin(nomor);
-  });
-
-  function salin(nomor) {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(nomor).then(() => {
-        alert("Nomor rekening disalin:\n" + nomor);
-      });
-    } else {
-      const t = document.createElement("textarea");
-      t.value = nomor;
-      document.body.appendChild(t);
-      t.select();
-      document.execCommand("copy");
-      t.remove();
-      alert("Nomor rekening disalin:\n" + nomor);
-    }
-  }
-
-  // === KONFIRMASI GIFT KE WHATSAPP & UPLOAD BUKTI TF ===
-  const giftConfirmForm = document.getElementById("giftConfirmForm");
-  if (giftConfirmForm) {
-    giftConfirmForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      
-      const nama = document.getElementById("tfNama").value;
-      const nominal = document.getElementById("tfNominal").value;
-      const ucapan = document.getElementById("tfUcapan").value;
-      
-      // Mengambil data file gambar
-      const fileInput = document.getElementById("tfBukti");
-      const file = fileInput ? fileInput.files[0] : null;
-      const submitBtn = giftConfirmForm.querySelector('button[type="submit"]');
-      
-      // Nomor WA Tujuan Update
-      const phone = "6285706889273";
-      
-      const sendWA = (buktiUrl = "") => {
-        let message = `*Konfirmasi Gift Wedding*\n\n`;
-        message += `Nama : ${nama}\n`;
-        message += `Nominal : Rp ${nominal}\n`;
-        message += `Ucapan : ${ucapan}\n`;
-        if (buktiUrl) {
-          message += `Bukti TF : ${buktiUrl}\n\n`;
-        } else {
-          message += `Bukti TF : (Tidak dilampirkan dari web)\n_Mohon lampirkan foto/screenshot bukti transfer pada obrolan ini._\n\n`;
-        }
-        message += `Happy Wedding!`;
-        
-        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-        window.open(waUrl, '_blank');
-        
-        giftConfirmForm.reset();
-        submitBtn.innerHTML = "Konfirmasi";
-        submitBtn.disabled = false;
-      };
-
-      if (file) {
-        submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Mengunggah...';
-        submitBtn.disabled = true; 
-        
-        const reader = new FileReader();
-        reader.onload = async function() {
-          const base64Data = reader.result.split(',')[1];
-          
-          const formData = new URLSearchParams();
-          formData.append('action', 'uploadBukti');
-          formData.append('fileName', file.name);
-          formData.append('mimeType', file.type);
-          formData.append('fileData', base64Data);
-          
-          try {
-            const response = await fetch(scriptURL, {
-              method: 'POST',
-              body: formData
-            });
-            const result = await response.json();
-            if (result.result === 'success') {
-              sendWA(result.url); 
-            } else {
-              alert("Gagal mengunggah bukti ke server. Anda akan diarahkan ke WhatsApp.");
-              sendWA(); 
-            }
-          } catch (error) {
-            console.error("Error upload:", error);
-            alert("Koneksi bermasalah. Anda akan diarahkan ke WhatsApp.");
-            sendWA();
-          }
-        };
-        reader.readAsDataURL(file);
-      } else {
-        sendWA();
-      }
-    });
-  }
-
-  // === NAMA TAMU DARI URL ===
-  const params = new URLSearchParams(window.location.search);
-  const nama = params.get("to");
-  const namaTamu = document.getElementById("namaTamu");
-  if (namaTamu) {
-    if (nama) {
-      namaTamu.textContent = decodeURIComponent(nama).replace(/\+/g, " ");
-      namaTamu.classList.remove("hidden");
-    } else {
-      namaTamu.classList.add("hidden");
-    }
-  }
-
-  // === BUKA UNDANGAN (COVER SLIDE UP, MUSIC & SENSOR VIDEO VVIP) ===
-  const openBtn = document.getElementById("openBtn");
-  const cover = document.getElementById("cover");
-  const invitation = document.getElementById("invitation1") || document.querySelector(".invitation1");
-  const menu = document.getElementById("menuNavigasi");
-  const bgMusic = document.getElementById("bgMusic");
-  const bgVideo = document.getElementById("bgVideo");
-  const videoOverlay = document.getElementById("video-overlay");
-  
-  let isOpened = false;
-  let menuShown = false;
-
-  function safePlay() {
-    if (!bgMusic) return;
-    const p = bgMusic.play();
-    if (p !== undefined) p.catch((err) => console.warn("Play ditolak:", err));
-  }
-  function safePause() {
-    if (bgMusic) try { bgMusic.pause(); } catch (e) {}
-  }
-
-  if (openBtn && cover && invitation) {
-    openBtn.addEventListener("click", () => {
-      document.body.classList.remove("lock-scroll");
-      invitation.style.display = "block"; 
-      
-      // Memicu CSS transition Cover Terangkat ke atas (Slide up)
-      cover.classList.add("cover-slide-up");
-      
-      // Video langsung otomatis jalan sesaat setelah tombol diklik
-      if (bgVideo) {
-        bgVideo.play();
-      }
-      
-      isOpened = true;
-      safePlay(); 
-      
-      // Setelah animasi cover 1.2 detik selesai, hilangkan elemennya sepenuhnya
-      setTimeout(() => {
-        cover.style.display = "none";
-      }, 1200); 
-    });
-  }
-
-  // === TIMELINE SENSOR VIDEO ANIMASI SEKUENSIAL ===
-  if (bgVideo) {
-    bgVideo.addEventListener("timeupdate", () => {
-      // 1. Detik 4: Memicu Seluruh Rantai Animasi Bingkai VVIP
-      if (bgVideo.currentTime >= 4 && videoOverlay) {
-        // Class ini akan menjalankan urutan di CSS: Kaca -> Garis Menyambung -> Foto -> Teks
-        videoOverlay.classList.add("show-frame");
-      }
-      
-      // 2. Detik 11: Menu Navigator Burgundy Muncul Otomatis
-      if (bgVideo.currentTime >= 11 && !menuShown) {
-        if (menu) menu.classList.add("show");
-        menuShown = true;
-      }
-      
-      // 3. Detik 13.9: Matikan video agar beku (freeze) menjadi background
-      if (bgVideo.currentTime >= 13.9) {
-        bgVideo.pause();
-      }
-    });
-  }
-
-  document.addEventListener("visibilitychange", () => {
-    if (!isOpened) return;
-    document.visibilityState === "visible" ? safePlay() : safePause();
-  });
-  window.addEventListener("blur", () => isOpened && safePause());
-  window.addEventListener("focus", () => isOpened && safePlay());
-  window.addEventListener("beforeunload", () => safePause());
-
-  // === COUNTDOWN ACARA TERBARU ===
-  function countdown() {
-    const target = new Date(2026, 6, 18, 9, 0, 0).getTime();
-    const endEvent = new Date(2026, 6, 20, 0, 0, 0).getTime();
-    const now = Date.now();
-    const diff = target - now;
-
-    const el = id => document.getElementById(id);
-    const countdownDiv = document.getElementById("countdown");
-    const titleDiv = document.querySelector(".savethedate-title");
-
-    if (now >= endEvent) {
-      if(countdownDiv) countdownDiv.innerHTML = "<p style='color:#fff; font-size:1.2rem;'>Terima kasih atas doa dan restunya.</p>";
-      if(titleDiv) titleDiv.innerHTML = "Acara Telah Selesai";
-      clearInterval(timer);
-      return;
-    } else if (now >= target && now < endEvent) {
-      if(countdownDiv) countdownDiv.innerHTML = "<p style='color:#fff; font-size:1.2rem;'>Acara sedang berlangsung saat ini.</p>";
-      if(titleDiv) titleDiv.innerHTML = "Acara Sedang Berlangsung 🎉";
-      clearInterval(timer);
-      return;
-    }
-
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-    if(el("days")) el("days").textContent = d.toString().padStart(2, "0");
-    if(el("hours")) el("hours").textContent = h.toString().padStart(2, "0");
-    if(el("minutes")) el("minutes").textContent = m.toString().padStart(2, "0");
-    if(el("seconds")) el("seconds").textContent = s.toString().padStart(2, "0");
-  }
-  const timer = setInterval(countdown, 1000);
-  countdown();
-
-  // === SCROLL HALUS MENU BAWAH ===
-  document.querySelectorAll('#menuNavigasi a[href^="#"]').forEach(link => {
-    link.addEventListener("click", e => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute("href"));
-      if (!target) return;
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-
-  // === GALERI ACARA & LIGHTBOX ===
-  const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
-  const galeriGridItems = document.querySelectorAll('.galeri-grid .galeri-item img');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.querySelector('.lightbox-img');
-  const closeBtn = document.querySelector('.close');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
-  let currentImgIndex = 0;
-
-  lightboxTriggers.forEach((img) => {
-    img.addEventListener('click', () => {
-      lightbox.style.display = 'flex';
-      lightboxImg.src = img.src;
-      currentImgIndex = Array.from(galeriGridItems).findIndex(gridImg => gridImg.src === img.src);
-      if(currentImgIndex === -1) currentImgIndex = 0; 
-    });
-  });
-
-  closeBtn.addEventListener('click', () => { lightbox.style.display = 'none'; });
-
-  prevBtn.addEventListener('click', () => {
-    currentImgIndex = (currentImgIndex - 1 + galeriGridItems.length) % galeriGridItems.length;
-    lightboxImg.src = galeriGridItems[currentImgIndex].src;
-  });
-
-  nextBtn.addEventListener('click', () => {
-    currentImgIndex = (currentImgIndex + 1) % galeriGridItems.length;
-    lightboxImg.src = galeriGridItems[currentImgIndex].src;
-  });
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) lightbox.style.display = 'none';
-  });
-
-  // === RSVP & UCAPAN GOOGLE SHEET (DENGAN PAGINASI AMAN) ===
-  let allUcapan = [];
-  let currentPage = 1;
-  const itemsPerPage = 5; 
-
-  const notif = document.getElementById("notif");
-  const showNotif = (text = "🎉 Terima kasih atas ucapannya!") => {
-    notif.textContent = text;
-    notif.classList.add("show");
-    setTimeout(() => notif.classList.remove("show"), 3000);
-  };
-
-  const list = document.getElementById("list");
-  const paginationContainer = document.getElementById("pagination");
-  const form = document.getElementById("rsvpForm");
-
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const nama = document.getElementById("nama").value.trim();
-      const ucapan = document.getElementById("ucapan").value.trim();
-      const kehadiran = document.getElementById("kehadiran").value;
-      const waktu = new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
-
-      if (!nama || !ucapan || !kehadiran) return;
-
-      const formData = new FormData();
-      formData.append("nama", nama);
-      formData.append("ucapan", ucapan);
-      formData.append("kehadiran", kehadiran);
-      formData.append("waktu", waktu);
-      formData.append("kode_klien", KODE_KLIEN);
-
-      await fetch(scriptURL, { method: "POST", body: formData });
-      form.reset();
-      
-      // Kembalikan tinggi textarea ke bentuk awal
-      document.getElementById("ucapan").style.height = "48px";
-      
-      showNotif();
-      currentPage = 1; 
-      loadUcapan(true);
-    });
-  }
-
-  function renderUcapan() {
-    list.innerHTML = "";
-    
-    if (allUcapan.length === 0) {
-      list.innerHTML = `<p style="opacity:0.8; text-align:center; color: #fff;">Belum ada ucapan 😇</p>`;
-      paginationContainer.innerHTML = "";
-      return;
-    }
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentItems = allUcapan.slice(startIndex, endIndex);
-
-    currentItems.forEach(row => {
-      const item = document.createElement("div");
-      item.className = "ucapan-item";
-      item.innerHTML = `<strong>${row.nama}</strong> (${row.kehadiran})<br>
-                        <p>${row.ucapan}</p>
-                        <small>${row.waktu}</small>`;
-      list.appendChild(item);
-    });
-  }
-
-  function renderPagination() {
-    paginationContainer.innerHTML = "";
-    
-    const totalPages = Math.ceil(allUcapan.length / itemsPerPage);
-    if (totalPages <= 1) return; 
-
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement("button");
-      btn.type = "button"; // FIX MUTLAK: Mencegah tombol paginasi bertindak sebagai tombol submit
-      btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
-      btn.textContent = i;
-      
-      btn.addEventListener("click", function(e) {
-        e.preventDefault(); // Mencegah reload halaman
-        currentPage = i;
-        renderUcapan();
-        renderPagination();
-        
-        // AUTO SCROLL FIX: Layar bergeser mulus dan mengunci di judul "Ucapan & Kehadiran"
-        document.getElementById("ucapanList").scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-      
-      paginationContainer.appendChild(btn);
-    }
-  }
-
-  async function loadUcapan(forceFullReload = false) {
-    try {
-      const res = await fetch(scriptURL + "?kode_klien=" + KODE_KLIEN);
-      const data = await res.json();
-      
-      if (forceFullReload || data.length !== allUcapan.length) {
-        allUcapan = data.slice().reverse();
-        renderUcapan();
-        renderPagination();
-      }
-    } catch (err) {
-      console.error("Gagal memuat ucapan:", err);
-    }
-  }
-
-  // Gunakan fungsi aman untuk setInterval agar tidak melempar event sebagai argument "forceFullReload"
-  loadUcapan(true);
-  setInterval(() => loadUcapan(false), 8000);
-
 });
 </script>
 </body>
