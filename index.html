@@ -1173,32 +1173,31 @@
     .animasi-scroll.muncul[data-anim="zoom-up"] { opacity: 1; transform: scale(1) translateY(0) translateZ(0); }
     
     /* =========================================
-       BINGKAI PENUTUP BAWAH (PERBAIKAN GARIS & PADDING)
+       BINGKAI PENUTUP BAWAH (ANTI-SHRINK LEGA VVIP)
        ========================================= */
     .frame-penutup {
       margin: 0 auto !important;
       pointer-events: auto !important;
       width: 90vw !important; 
       max-width: 340px !important; 
-      aspect-ratio: 340 / 540 !important; /* Dibiarkan agar bentuk bingkai tetap presisi */
       position: relative !important;
       filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.3)) !important;
     }
     
     .frame-penutup .vf-content {
-      padding: 20px 25px !important; /* Dikecilkan agar isi tidak mendesak garis SVG */
+      padding: 60px 35px !important; 
       position: absolute !important; top:0; left:0; width: 100%; height: 100%;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       box-sizing: border-box;
     }
 
     .ikon-gunungan-penutup {
-      width: 40px !important; /* Sedikit dikecilkan agar pas di atas foto */
+      width: 40px !important; 
       margin-bottom: 8px !important;
     }
 
     .frame-penutup .vf-photo {
-      width: 48% !important; /* Diturunkan persentasenya agar bingkai aman */
+      width: 48% !important; 
       aspect-ratio: 3/4; 
       object-fit: cover; 
       border-radius: 1000px 1000px 0 0; 
@@ -1474,7 +1473,6 @@
             <label>Ucapan :</label>
             <input type="text" id="tfUcapan" placeholder="Ucapan" required>
           </div>
-          <!-- BUKTI TF (MURNI TANPA MERUSAK STRUKTUR) -->
           <div class="form-group">
             <label>Bukti Transfer (Opsional) :</label>
             <input type="file" id="tfBukti" accept="image/*">
@@ -1530,9 +1528,8 @@
         <path d="M 170 22 C 215 22, 242 50, 278 50 A 12 12 0 0 1 290 62 L 290 70 A 12 12 0 0 0 302 82 L 302 458 A 12 12 0 0 0 290 470 L 290 478 A 12 12 0 0 1 278 490 C 242 490, 215 518, 170 518 C 125 518, 98 490, 62 490 A 12 12 0 0 1 50 478 L 50 470 A 12 12 0 0 0 38 458 L 38 82 A 12 12 0 0 0 50 70 L 50 62 A 12 12 0 0 1 62 50 C 98 50, 125 22, 170 22 Z" fill="none" stroke="#6c7f93" stroke-width="1.5"/>
       </svg>
       <div class="vf-content">
-        <!-- UKURAN DIKECILKAN AGAR TIDAK MERUSAK GARIS SVG -->
-        <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan ikon-gunungan-penutup" loading="lazy">
-        <img src="galeri1.webp" class="vf-photo" alt="Foto Couple">
+        <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan ikon-gunungan-penutup" loading="lazy" style="margin-bottom: 12px; margin-top: 0;">
+        <img src="galeri1.webp" class="vf-photo" alt="Foto Couple" style="width: 58%; aspect-ratio: 3/4; object-fit: cover; border-radius: 1000px 1000px 0 0; border: 1.5px solid #5a6e82; margin-bottom: 25px; margin-top: 0;">
         <p class="ucapan-teks-penutup">
           Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
         </p>
@@ -1554,17 +1551,15 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // SCRIPT GOOGLE SHEET (Link Terbaru dari Mas Firnanda)
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzZidPPA1HdlAGW5LjV1-mfGYPPE22gzlFkD1jQxyQUT2OYPoOddNSwTaJ1ZzZzQA7_/exec";
+  // LINK SUDAH TERPASANG DENGAN SEMPURNA DI BAWAH INI
+  const scriptURL = "https://script.google.com/macros/s/AKfycbwwhEFe6U_FNbJ8ehilL1ynAm_ItWH0Sv1A8WL6tQvzJp28d4rzpE5e0E3gNE4YkkPs/exec";
   const KODE_KLIEN = "SINTA_BILLY";
 
-  // === ANIMASI SCROLL ===
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => entry.target.classList.toggle('muncul', entry.isIntersecting));
   }, { threshold: 0.15 });
   document.querySelectorAll('.animasi-scroll').forEach(el => observer.observe(el));
 
-  // === TOMBOL SALIN REKENING ===
   document.addEventListener("click", function (e) {
     const btn = e.target.closest(".copy-btn");
     if (!btn) return;
@@ -1589,10 +1584,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === KONFIRMASI GIFT KE WHATSAPP & UPLOAD BUKTI TF (DIPERBAIKI) ===
   const giftConfirmForm = document.getElementById("giftConfirmForm");
   if (giftConfirmForm) {
-    giftConfirmForm.addEventListener("submit", function(e) {
+    giftConfirmForm.addEventListener("submit", async function(e) {
       e.preventDefault();
       
       const nama = document.getElementById("tfNama").value;
@@ -1630,7 +1624,6 @@ document.addEventListener("DOMContentLoaded", () => {
         reader.onload = async function() {
           const base64Data = reader.result.split(',')[1];
           
-          // MENGGUNAKAN FORMDATA (Mencegah error chocking saat upload file besar)
           const formData = new FormData();
           formData.append('action', 'uploadBukti');
           formData.append('fileName', file.name);
@@ -1662,7 +1655,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === NAMA TAMU DARI URL ===
   const params = new URLSearchParams(window.location.search);
   const namaURL = params.get("to");
   const namaTamu = document.getElementById("namaTamu");
@@ -1675,7 +1667,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === BUKA UNDANGAN (FUNGSI DIKEMBALIKAN UTUH) ===
   const openBtn = document.getElementById("openBtn");
   const cover = document.getElementById("cover");
   const invitation = document.getElementById("invitation1") || document.querySelector(".invitation1");
@@ -1714,7 +1705,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // === TIMELINE SENSOR VIDEO ANIMASI SEKUENSIAL ===
   if (bgVideo) {
     bgVideo.addEventListener("timeupdate", () => {
       if (bgVideo.currentTime >= 4 && videoOverlay) {
@@ -1738,7 +1728,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("focus", () => isOpened && safePlay());
   window.addEventListener("beforeunload", () => safePause());
 
-  // === COUNTDOWN ACARA TERBARU ===
   function countdown() {
     const target = new Date(2026, 6, 18, 9, 0, 0).getTime();
     const endEvent = new Date(2026, 6, 20, 0, 0, 0).getTime();
@@ -1774,7 +1763,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const timer = setInterval(countdown, 1000);
   countdown();
 
-  // === SCROLL HALUS MENU BAWAH ===
   document.querySelectorAll('#menuNavigasi a[href^="#"]').forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
@@ -1784,7 +1772,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // === GALERI ACARA & LIGHTBOX ===
   const lightboxTriggers = document.querySelectorAll('.lightbox-trigger');
   const galeriGridItems = document.querySelectorAll('.galeri-grid .galeri-item img');
   const lightbox = document.getElementById('lightbox');
@@ -1819,7 +1806,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === lightbox) lightbox.style.display = 'none';
   });
 
-  // === RSVP & UCAPAN GOOGLE SHEET ===
   let allUcapan = [];
   let currentPage = 1;
   const itemsPerPage = 5; 
@@ -1876,7 +1862,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentItems = allUcapan.slice(startIndex, endIndex);
 
     currentItems.forEach(row => {
-      // PENYELESAIAN MASALAH "ANGKA GAK JELAS" (Konversi Tanggal agar rapi di Indonesia)
       let rawWaktu = row.waktu || row[0] || "";
       let dateObj = new Date(rawWaktu);
       let waktuRapi = !isNaN(dateObj) ? dateObj.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }) + ' WIB' : rawWaktu;
@@ -1885,7 +1870,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let hadirAman = row.kehadiran || row[5] || "Hadir";
       let ucapanAman = row.ucapan || row[4] || "";
 
-      if (!namaAman || namaAman === "undefined") return; // Mencegah baris kosong muncul
+      if (!namaAman || namaAman === "undefined") return;
 
       const item = document.createElement("div");
       item.className = "ucapan-item";
@@ -1927,7 +1912,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
       
       if (forceFullReload || data.length !== allUcapan.length) {
-        allUcapan = data; // Tidak perlu reverse karena Apps Script sudah menyortir yang terbaru di atas
+        allUcapan = data; 
         renderUcapan();
         renderPagination();
       }
