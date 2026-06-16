@@ -473,14 +473,16 @@
       transform: rotate(45deg);
     }
 
+    /* PERUBAHAN FONT NAMA PENGANTIN SESUAI INSTRUKSI (SAMA DENGAN HALAMAN COVER) */
     .nama-pengantin {
-      font-family: "Poppins", sans-serif;
-      font-size: 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
       margin-top: 15px;
       margin-bottom: 5px;
       color: #7b1f26;
       line-height: 1.3;
       font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
     .orang-tua {
@@ -614,6 +616,7 @@
       letter-spacing: 4px;
       margin-bottom: 15px;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      transition: all 0.5s ease;
     }
 
     .savethedate-quote {
@@ -1556,7 +1559,7 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const scriptURL = "https://script.google.com/macros/s/AKfycbzG8F-UHPHggkZf37rapan14p8ePVA6EgWepiLtWBJmwE72ScN7JVsSq__4ENZvS8gr/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbzZotte1_gH_2b0oX99_YVzD2WvYxK6RInC_MvW9vXbC3b9d4rzpE5e0E3gNE4YkkPs/exec";
   const KODE_KLIEN = "SINTA_BILLY";
 
   const observer = new IntersectionObserver((entries) => {
@@ -1685,6 +1688,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("focus", () => isOpened && safePlay());
   window.addEventListener("beforeunload", () => safePause());
 
+  // === COUNTDOWN ACARA TERBARU DENGAN EFEK DINAMIS ===
   function countdown() {
     const target = new Date(2026, 6, 18, 9, 0, 0).getTime();
     const endEvent = new Date(2026, 6, 20, 0, 0, 0).getTime();
@@ -1694,18 +1698,58 @@ document.addEventListener("DOMContentLoaded", () => {
     const el = id => document.getElementById(id);
     const countdownDiv = document.getElementById("countdown");
     const titleDiv = document.querySelector(".savethedate-title");
+    const quoteDiv = document.querySelector(".savethedate-quote");
+    const btnCalendar = document.querySelector(".btn-calendar");
 
+    // LOGIKA 1: Jika Acara Telah Lewat
     if (now >= endEvent) {
-      if(countdownDiv) countdownDiv.innerHTML = "<p style='color:#fff; font-size:1.2rem;'>Terima kasih atas doa dan restunya.</p>";
-      if(titleDiv) titleDiv.innerHTML = "Acara Telah Selesai";
+      if(countdownDiv) countdownDiv.style.display = "flex";
+      if(quoteDiv) quoteDiv.style.display = "block";
+      if(btnCalendar) btnCalendar.style.display = "none"; 
+      
+      if(titleDiv) {
+        titleDiv.innerHTML = "Acara Telah Selesai";
+        titleDiv.style.fontFamily = "'Times New Roman', serif";
+        titleDiv.style.fontSize = "36px";
+        titleDiv.style.color = "#ffffff";
+        titleDiv.style.letterSpacing = "4px";
+        titleDiv.style.textShadow = "2px 2px 5px rgba(0,0,0,0.5)";
+        titleDiv.style.textTransform = "uppercase";
+      }
+      
+      if(el("days")) el("days").textContent = "00";
+      if(el("hours")) el("hours").textContent = "00";
+      if(el("minutes")) el("minutes").textContent = "00";
+      if(el("seconds")) el("seconds").textContent = "00";
+
       if (typeof timer !== 'undefined') clearInterval(timer);
       return;
+      
+    // LOGIKA 2: Jika Acara Sedang Berlangsung (Hari H)
     } else if (now >= target && now < endEvent) {
-      if(countdownDiv) countdownDiv.innerHTML = "<p style='color:#fff; font-size:1.2rem;'>Acara sedang berlangsung saat ini.</p>";
-      if(titleDiv) titleDiv.innerHTML = "Acara Sedang Berlangsung 🎉";
+      if(countdownDiv) countdownDiv.style.display = "none";
+      if(quoteDiv) quoteDiv.style.display = "none";
+      if(btnCalendar) btnCalendar.style.display = "none";
+      
+      if(titleDiv) {
+        titleDiv.innerHTML = "Hari Bahagia<br>Sinta & Billy<br>Sedang Berlangsung";
+        titleDiv.style.fontFamily = "'Great Vibes', cursive";
+        titleDiv.style.fontSize = "50px";
+        titleDiv.style.color = "#f3a302";
+        titleDiv.style.lineHeight = "1.3";
+        titleDiv.style.letterSpacing = "2px";
+        titleDiv.style.textShadow = "2px 2px 5px rgba(0,0,0,0.6)";
+        titleDiv.style.textTransform = "capitalize";
+      }
+      
       if (typeof timer !== 'undefined') clearInterval(timer);
       return;
     }
+
+    // LOGIKA 3: Sebelum Hari H (Berjalan Normal)
+    if(countdownDiv) countdownDiv.style.display = "flex";
+    if(quoteDiv) quoteDiv.style.display = "block";
+    if(btnCalendar) btnCalendar.style.display = "inline-flex";
 
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
     const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
