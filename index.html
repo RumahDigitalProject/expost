@@ -12,9 +12,6 @@
 
   <title>The Wedding of Sinta & Billy</title>
   
-  <!-- JALUR VVIP: Memaksa browser memprioritaskan gambar cover depan agar tidak blank hitam -->
-  <link rel="preload" as="image" href="galeri8.webp">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
@@ -968,7 +965,7 @@
       z-index: 2;
     }
 
-    /* KAPSUL BINGKAI RAKSASA (UPDATE TAMBAHAN BACKGROUND GALERI8 + OVERLAY PUTIH AGAR TEXT JELAS) */
+    /* KAPSUL BINGKAI RAKSASA */
     .box-gift-pill {
       background: linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)), url('galeri8.webp') center center / cover no-repeat; 
       border: 3px solid #354a5f; 
@@ -1025,7 +1022,6 @@
       font-family: 'Poppins', sans-serif; font-size: 13px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); background: #ffffff; color: #333; box-sizing: border-box; 
     }
     
-    /* Tombol Konfirmasi Pendek, Kecil Sesuai Request */
     .btn-konfirmasi {
       width: auto; padding: 8px 30px; background: #354a5f; color: #fff; 
       border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600;
@@ -1244,7 +1240,6 @@
 </div>
 
 <div class="slideshow" id="slideshow-section">
-  <!-- PRAMUSAJI MALAS: preload video dikurangi bebannya, gunakan preload="metadata" bila video ukurannya besar, tapi karena ini cover, biarkan "auto" agar cepat memutar. -->
   <video id="bgVideo" src="video.mp4" playsinline muted preload="auto" class="background-video"></video>
   
   <div id="video-overlay">
@@ -1257,7 +1252,6 @@
       </svg>
       
       <div class="vf-content">
-        <!-- PRAMUSAJI MALAS: loading="lazy" pada gambar -->
         <img src="galeri1.webp" class="vf-photo anim-photo" alt="Foto Couple" loading="lazy" decoding="async">
         <div class="anim-text">
           <p class="vf-top">THE WEDDING OF</p>
@@ -1447,10 +1441,26 @@
   <div class="box-gift-pill animasi-scroll" data-anim="up">
       <img src="gunungan.webp" alt="Gunungan" class="ikon-gunungan animasi-scroll" data-anim="zoom-up" loading="lazy" decoding="async" style="margin-bottom: 25px;">
       
+      <div class="atm-card" data-rek="1122 3344 5566" style="display: none !important;">
+        <div class="bank-logo"><img src="bank.webp" alt="SeaBank Logo" loading="lazy" decoding="async"></div>
+        <div class="atm-chip"></div>
+        <div class="rek-number">1122 3344 5566</div>
+        <div class="rek-name">Nadia Shafira</div>
+        <button class="copy-btn"><i class="fa-regular fa-copy"></i> <span>Salin</span></button>
+      </div>
+
       <div class="atm-card" data-rek="000901148352509">
         <div class="bank-logo"><img src="bank.webp" alt="Bank Logo" loading="lazy" decoding="async"></div>
         <div class="atm-chip"></div>
         <div class="rek-number">0009 0114 8352 509</div>
+        <div class="rek-name">Sinta Wulan Dari</div>
+        <button class="copy-btn"><i class="fa-regular fa-copy"></i> <span>Salin</span></button>
+      </div>
+
+      <div class="atm-card" data-rek="3220971898">
+        <div class="bank-logo"><img src="bca.webp" alt="BCA Logo" loading="lazy" decoding="async"></div>
+        <div class="atm-chip"></div>
+        <div class="rek-number">3220 9718 98</div>
         <div class="rek-name">Sinta Wulan Dari</div>
         <button class="copy-btn"><i class="fa-regular fa-copy"></i> <span>Salin</span></button>
       </div>
@@ -1504,7 +1514,6 @@
 
 <div id="notif">🎉 Terima kasih atas ucapannya!</div>
 
-<!-- PRAMUSAJI MALAS: Audio disetting ke metadata agar tidak membebani loading awal -->
 <audio id="bgMusic" loop preload="metadata">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
@@ -1756,6 +1765,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === lightbox) lightbox.style.display = 'none';
   });
 
+  // === RSVP & UCAPAN GOOGLE SHEET ===
   let allUcapan = [];
   let currentPage = 1;
   const itemsPerPage = 5; 
