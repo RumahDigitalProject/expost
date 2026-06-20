@@ -1064,7 +1064,7 @@
       -webkit-backface-visibility: hidden; transform: translateZ(0);
     }
     
-    #rsvp input, #rsvp select, #rsvp textarea, #rsvp button {
+    #rsvp input[type="text"], #rsvp textarea, #rsvp button {
       width: 100%; 
       max-width: 100%; 
       box-sizing: border-box; 
@@ -1080,19 +1080,81 @@
       overflow: hidden; 
     } 
 
-    #rsvp input, #rsvp textarea, #rsvp select { background: rgba(255,255,255,0.9); color: #333; }
+    /* === UBAH JADI PUTIH BERSIH === */
+    #rsvp input[type="text"], #rsvp textarea { 
+      background: #ffffff; 
+      color: #333; 
+    }
     
     #rsvp button {
       background: rgba(243, 163, 2, 0.85); color: #ffffff; font-weight: 600; cursor: pointer; transition: 0.3s; border: none;
     }
     #rsvp button:hover { background: rgba(243, 163, 2, 1); transform: scale(1.02); }
     
+    /* =========================================
+       STYLE RADIO BUTTON KEHADIRAN (BARU)
+       ========================================= */
+    .radio-kehadiran-group {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      color: #ffffff;
+      padding: 5px; 
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .radio-label input[type="radio"] {
+      display: none; 
+    }
+    
+    .radio-custom {
+      width: 22px;
+      height: 22px;
+      border: 2px solid rgba(243, 163, 2, 0.8);
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .radio-label input[type="radio"]:checked + .radio-custom {
+      border-color: #f3a302;
+      background: #ffffff;
+    }
+    
+    .radio-label input[type="radio"]:checked + .radio-custom::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      background: #f3a302;
+      border-radius: 50%;
+    }
+
     .ucapan-list { margin-top: 30px; text-align: left; }
     
+    /* === UBAH JADI PUTIH BERSIH === */
     .ucapan-item {
-      background: rgba(255, 255, 255, 0.85); border-radius: 12px; padding: 15px;
+      background: #ffffff; 
+      border-radius: 12px; padding: 15px;
       margin-bottom: 10px; animation: fadeIn 0.6s ease;
       color: #333; border-left: 4px solid #f3a302;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
     }
     .ucapan-item small { opacity: 0.8; font-size: 13px; color: #5a6e82; }
 
@@ -1221,6 +1283,70 @@
       display: flex !important;
       justify-content: center !important;
       align-items: center !important;
+    }
+
+    /* =========================================
+       CUSTOM ALERT MODAL (POP UP PUTIH)
+       ========================================= */
+    .custom-alert-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 100000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .custom-alert-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .custom-alert-box {
+      background: #ffffff;
+      padding: 30px 20px;
+      border-radius: 15px;
+      max-width: 320px;
+      width: 85%;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .custom-alert-overlay.show .custom-alert-box {
+      transform: translateY(0);
+    }
+    .custom-alert-icon {
+      font-size: 40px;
+      color: #f3a302;
+      margin-bottom: 15px;
+    }
+    .custom-alert-text {
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      white-space: pre-wrap; 
+    }
+    .custom-alert-btn {
+      background: #354a5f;
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .custom-alert-btn:hover {
+      background: #1c2b3a;
     }
   </style>
 </head>
@@ -1495,23 +1621,37 @@
   </div>
 </section>
 
+<!-- =========================================
+     RSVP & UCAPAN BARU (RADIO BUTTON SEJAJAR)
+     ========================================= -->
 <section id="rsvp" class="section-parallax">
   <div class="rsvp-container">
     <h2 class="RSVP-title animasi-scroll"> Rsvp & Ucapan</h2>
     <form id="rsvpForm">
       <input type="text" id="nama" placeholder="Nama Anda" required>
       <textarea id="ucapan" placeholder="Tulis ucapan Anda..." required oninput="this.style.height='48px';this.style.height=this.scrollHeight+'px'"></textarea>
-      <select id="kehadiran" required>
-        <option value="">Konfirmasi Kehadiran</option>
-        <option value="Hadir">Hadir</option>
-        <option value="Tidak Hadir">Tidak Hadir</option>
-      </select>
+      
+      <!-- Pilihan Kehadiran Sejajar (Radio Buttons) -->
+      <div class="radio-kehadiran-group">
+        <label class="radio-label">
+          <input type="radio" name="kehadiran" value="Hadir" required>
+          <span class="radio-custom"></span>
+          Hadir
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="kehadiran" value="Tidak Hadir" required>
+          <span class="radio-custom"></span>
+          Tidak Hadir
+        </label>
+      </div>
+
       <button type="submit">Kirim Ucapan</button>
     </form>
     
-    <div class="ucapan-list" id="ucapanList">
+    <!-- Wadah ucapan disembunyikan secara default (display: none) -->
+    <div class="ucapan-list" id="ucapanList" style="display: none;">
       <h3 style="margin-top:30px; color: #f3a302; text-align: left;">Ucapan & Kehadiran</h3>
-      <div id="list"><p style="opacity:0.8; text-align:center; color: #fff;">Memuat ucapan... 😇</p></div>
+      <div id="list"></div>
       <div id="pagination" class="pagination-container"></div>
     </div>
   </div>
@@ -1561,7 +1701,28 @@
   </footer>
 </div>
 
+<!-- =========================================
+     WADAH CUSTOM ALERT POP-UP
+     ========================================= -->
+<div id="customAlert" class="custom-alert-overlay">
+  <div class="custom-alert-box">
+    <div class="custom-alert-icon"><i class="fa-solid fa-circle-info"></i></div>
+    <p id="customAlertText" class="custom-alert-text"></p>
+    <button class="custom-alert-btn" onclick="closeCustomAlert()">Mengerti</button>
+  </div>
+</div>
+
 <script>
+// === FUNGSI CUSTOM ALERT POP-UP ===
+function showCustomAlert(msg) {
+  document.getElementById('customAlertText').innerText = msg;
+  document.getElementById('customAlert').classList.add('show');
+}
+
+function closeCustomAlert() {
+  document.getElementById('customAlert').classList.remove('show');
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const scriptURL = "https://script.google.com/macros/s/AKfycbzG8F-UHPHggkZf37rapan14p8ePVA6EgWepiLtWBJmwE72ScN7JVsSq__4ENZvS8gr/exec";
   const KODE_KLIEN = "SINTA_BILLY";
@@ -1582,7 +1743,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function salin(nomor) {
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(nomor).then(() => {
-        alert("Nomor rekening disalin:\n" + nomor);
+        showCustomAlert("Nomor rekening berhasil disalin:\n" + nomor);
       });
     } else {
       const t = document.createElement("textarea");
@@ -1591,7 +1752,7 @@ document.addEventListener("DOMContentLoaded", () => {
       t.select();
       document.execCommand("copy");
       t.remove();
-      alert("Nomor rekening disalin:\n" + nomor);
+      showCustomAlert("Nomor rekening berhasil disalin:\n" + nomor);
     }
   }
 
@@ -1824,7 +1985,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === lightbox) lightbox.style.display = 'none';
   });
 
-  // === RSVP & UCAPAN GOOGLE SHEET ===
+  // === RSVP & UCAPAN GOOGLE SHEET (DIPERBARUI) ===
   let allUcapan = [];
   let currentPage = 1;
   const itemsPerPage = 5; 
@@ -1845,7 +2006,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const nama = document.getElementById("nama").value.trim();
       const ucapan = document.getElementById("ucapan").value.trim();
-      const kehadiran = document.getElementById("kehadiran").value;
+      
+      // Ambil nilai dari radio button yang dipilih
+      const kehadiranInput = document.querySelector('input[name="kehadiran"]:checked');
+      const kehadiran = kehadiranInput ? kehadiranInput.value : "";
+      
       const waktu = new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
 
       if (!nama || !ucapan || !kehadiran) return;
@@ -1876,7 +2041,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentPage = 1; 
         loadUcapan(true);
       } catch (err) {
-        alert("Gagal mengirim ucapan. Silakan coba lagi.");
+        showCustomAlert("Gagal mengirim ucapan. Silakan coba lagi.");
       } finally {
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
@@ -1885,13 +2050,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderUcapan() {
+    const ucapanListContainer = document.getElementById("ucapanList");
     list.innerHTML = "";
     
+    // Jika data kosong, sembunyikan area ucapan sepenuhnya
     if (allUcapan.length === 0) {
-      list.innerHTML = `<p style="opacity:0.8; text-align:center; color: #fff;">Belum ada ucapan 😇</p>`;
+      ucapanListContainer.style.display = "none";
       paginationContainer.innerHTML = "";
       return;
     }
+    
+    // Jika ada data, tampilkan areanya
+    ucapanListContainer.style.display = "block";
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -1962,7 +2132,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+    
+
 </body>
 </html>
-
 
